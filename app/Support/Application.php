@@ -3,6 +3,8 @@
 namespace Plugin\Support;
 
 use ArrayAccess;
+use Plugin\Support\Console\ConsoleServiceProvider;
+use Plugin\Support\View\ViewServiceProvider;
 
 class Application implements ArrayAccess
 {
@@ -46,6 +48,7 @@ class Application implements ArrayAccess
         }
 
         $this->registerBaseBindings();
+        $this->registerCoreProviders();
     }
 
     /**
@@ -58,6 +61,17 @@ class Application implements ArrayAccess
         static::setInstance($this);
 
         $this->instance('app', $this);
+    }
+
+    /**
+     * Register the core service providers
+     *
+     * @return void
+     */
+    protected function registerCoreProviders()
+    {
+        $this->register(ConsoleServiceProvider::class);
+        $this->register(ViewServiceProvider::class);
     }
 
     /**
