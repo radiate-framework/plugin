@@ -2,6 +2,8 @@
 
 namespace Plugin;
 
+use Plugin\Support\Application;
+
 /**
  * This file is for all the plugin helper functions. Functions should be called
  * using the namespace to prevent function conflicts with other plugins or the theme.
