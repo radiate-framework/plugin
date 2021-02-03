@@ -1,0 +1,9 @@
+{
+    "name": "wp-base-plugin",
+    "version": "1.0.0",
+    "description": "A WordPress plugin boilerplate",
+    "main": "index.js",
+    "scripts": {},
+    "author": "Ben Rutland",
+    "license": "MIT"
+}
