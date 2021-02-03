@@ -1,1 +1,0 @@
-<h1>Hello <?php echo $test; ?></h1>
