@@ -13,6 +13,7 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     protected $commands = [
         \Plugin\Support\Console\Commands\MakeController::class,
+        \Plugin\Support\Console\Commands\MakeProvider::class,
     ];
 
     /**
@@ -23,7 +24,9 @@ class ConsoleServiceProvider extends ServiceProvider
     public function register()
     {
         foreach ($this->commands as $command) {
-            $this->app->instance($command, new $command($this->app));
+            $this->app->instance($command, function ($app) use ($command) {
+                return new $command($app, $app['files']);
+            });
         }
     }
 
@@ -36,7 +39,7 @@ class ConsoleServiceProvider extends ServiceProvider
     {
         if (class_exists('WP_CLI')) {
             foreach ($this->commands as $command) {
-                $this->app[$command]->register();
+                $this->app[$command]($this->app)->register();
             }
         };
     }

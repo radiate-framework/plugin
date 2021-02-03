@@ -4,6 +4,7 @@ namespace Plugin\Support;
 
 use ArrayAccess;
 use Plugin\Support\Console\ConsoleServiceProvider;
+use Plugin\Support\Filesystem\FilesystemServiceProvider;
 use Plugin\Support\View\ViewServiceProvider;
 
 class Application implements ArrayAccess
@@ -35,6 +36,13 @@ class Application implements ArrayAccess
      * @var array
      */
     protected $providers = [];
+
+    /**
+     * The application namespace
+     *
+     * @var string
+     */
+    protected $namespace = 'Plugin';
 
     /**
      * Create the applicaiton
@@ -71,6 +79,7 @@ class Application implements ArrayAccess
     protected function registerCoreProviders()
     {
         $this->register(ConsoleServiceProvider::class);
+        $this->register(FilesystemServiceProvider::class);
         $this->register(ViewServiceProvider::class);
     }
 
@@ -93,7 +102,7 @@ class Application implements ArrayAccess
      */
     public function instance(string $abstract, $concrete)
     {
-        $this->instances[$abstract] = $concrete;
+        $this[$abstract] = $concrete;
     }
 
     /**
@@ -158,6 +167,16 @@ class Application implements ArrayAccess
     public static function setInstance(Application $app = null)
     {
         return static::$instance = $app;
+    }
+
+    /**
+     * Get the app namespace
+     *
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
     }
 
     /**

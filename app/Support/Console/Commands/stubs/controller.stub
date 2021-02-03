@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\Http\Controllers;
+namespace {{ namespace }};
 
-use Plugin\Support\Http\AjaxController as Controller;
+use {{ rootNamespace }}\Support\Http\AjaxController as Controller;
 
 class {{ class }} extends Controller
 {

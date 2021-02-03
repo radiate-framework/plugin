@@ -4,29 +4,29 @@ namespace Plugin\Support\Console\Commands;
 
 use Plugin\Support\Console\GeneratorCommand;
 
-class MakeController extends GeneratorCommand
+class MakeProvider extends GeneratorCommand
 {
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Controller';
+    protected $type = 'Provider';
 
     /**
      * The command signature.
      *
      * @var string
      */
-    protected $signature = 'make:controller {name : The name of the controller}
-                                            {--force : Overwrite the controller if it exists}';
+    protected $signature = 'make:provider {name : The name of the provider}
+                                            {--force : Overwrite the provider if it exists}';
 
     /**
      * The command description.
      *
      * @var string
      */
-    protected $description = 'Make a controller';
+    protected $description = 'Make a provider';
 
     /**
      * Get the stub path.
@@ -35,7 +35,7 @@ class MakeController extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/stubs/controller.stub';
+        return __DIR__ . '/stubs/provider.stub';
     }
 
     /**
@@ -46,6 +46,6 @@ class MakeController extends GeneratorCommand
      */
     protected function getDefaultNamespace(string $rootNamespace)
     {
-        return $rootNamespace . '\\Http\\Controllers';
+        return $rootNamespace . '\\Providers';
     }
 }
