@@ -1,11 +1,20 @@
 <?php
 
-namespace App;
+namespace Plugin;
 
 /**
  * This file is for all the plugin helper functions. Functions should be called
  * using the namespace to prevent function conflicts with other plugins or the theme.
  */
+
+
+function app($abstract = null)
+{
+    if ($abstract) {
+        return Application::getInstance()->get($abstract);
+    }
+    return Application::getInstance();
+}
 
 /**
  * Dump and die the given arguments
@@ -38,13 +47,5 @@ function dump(...$args): void
  */
 function view(string $path, array $args = []): string
 {
-    $path = str_replace('.', DIRECTORY_SEPARATOR, 'views.' . $path) . '.php';
-
-    ob_start();
-
-    extract($args);
-
-    require __DIR__ . DIRECTORY_SEPARATOR . $path;
-
-    return ob_get_clean();
+    return app('view')->make($path, $args);
 }
