@@ -1,0 +1,19 @@
+<?php
+
+namespace {{ namespace }};
+
+use Plugin\Support\Events\Dispatcher;
+
+class {{ class }}
+{
+    /**
+     * Register the listeners for the subscriber.
+     *
+     * @param \Plugin\Support\Events\Dispatcher $events
+     * @return void
+     */
+    public function subscribe(Dispatcher $events): void
+    {
+        //
+    }
+}

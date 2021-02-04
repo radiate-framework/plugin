@@ -76,7 +76,7 @@ class Dispatcher
     protected function resolveListener($listener)
     {
         if (is_string($listener) && class_exists($listener)) {
-            return new $listener;
+            return [new $listener, 'handle'];
         }
 
         return $listener;
