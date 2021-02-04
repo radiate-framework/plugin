@@ -9,8 +9,13 @@ use Plugin\Support\Foundation\Application;
  * using the namespace to prevent function conflicts with other plugins or the theme.
  */
 
-
-function app($abstract = null)
+/**
+ * Return the app or a bound instance
+ *
+ * @param string|null $abstract
+ * @return mixed
+ */
+function app(string $abstract = null)
 {
     if ($abstract) {
         return Application::getInstance()->get($abstract);
@@ -38,6 +43,17 @@ function dd(...$args): void
 function dump(...$args): void
 {
     var_dump(...$args);
+}
+
+/**
+ * Dispatch an event and call the listeners.
+ *
+ * @param mixed ...$args
+ * @return mixed
+ */
+function event(...$args)
+{
+    return app('events')->dispatch(...$args);
 }
 
 /**

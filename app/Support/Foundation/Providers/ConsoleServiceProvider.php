@@ -13,6 +13,7 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     protected $commands = [
         \Plugin\Support\Foundation\Console\MakeController::class,
+        \Plugin\Support\Foundation\Console\MakeEvent::class,
         \Plugin\Support\Foundation\Console\MakeListener::class,
         \Plugin\Support\Foundation\Console\MakeProvider::class,
         \Plugin\Support\Foundation\Console\MakeSubscriber::class,

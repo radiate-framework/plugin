@@ -18,3 +18,10 @@ $app->register(Plugin\Providers\EventServiceProvider::class);
 $app->register(Plugin\Providers\PluginServiceProvider::class);
 
 $app->boot();
+
+
+$app['events']->listen('test_event', function ($test) {
+    echo $test;
+});
+
+Plugin\event('test_event', 'yep init blud');
