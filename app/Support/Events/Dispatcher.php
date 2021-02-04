@@ -40,8 +40,12 @@ class Dispatcher
      * @param mixed ...$payload
      * @return mixed
      */
-    public function dispatch(string $event, ...$payload)
+    public function dispatch($event, ...$payload)
     {
+        if (is_object($event)) {
+            return apply_filters(get_class($event), $event);
+        }
+
         return apply_filters($event, ...$payload);
     }
 
