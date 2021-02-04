@@ -39,7 +39,6 @@ class ConsoleServiceProvider extends ServiceProvider
     {
         if (class_exists('WP_CLI')) {
             foreach ($this->commands as $command) {
-                var_dump($this->app[$command]);
                 $this->app[$command]->register();
             }
         };
