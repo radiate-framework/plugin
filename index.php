@@ -17,3 +17,6 @@ $app = new Plugin\Support\Application(__DIR__);
 $app->register(Plugin\Providers\PluginServiceProvider::class);
 
 $app->boot();
+
+
+Plugin\dump($app['app']);

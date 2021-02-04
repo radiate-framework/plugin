@@ -14,6 +14,8 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->instance('view', new View($this->app->basePath('views')));
+        $this->app->singleton('view', function ($app) {
+            return new View($app->basePath('views'));
+        });
     }
 }

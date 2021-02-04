@@ -13,6 +13,8 @@ class FilesystemServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->instance('files', new Filesystem());
+        $this->app->singleton('files', function () {
+            return new Filesystem();
+        });
     }
 }

@@ -24,7 +24,7 @@ class ConsoleServiceProvider extends ServiceProvider
     public function register()
     {
         foreach ($this->commands as $command) {
-            $this->app->instance($command, function ($app) use ($command) {
+            $this->app->singleton($command, function ($app) use ($command) {
                 return new $command($app, $app['files']);
             });
         }
@@ -39,7 +39,8 @@ class ConsoleServiceProvider extends ServiceProvider
     {
         if (class_exists('WP_CLI')) {
             foreach ($this->commands as $command) {
-                $this->app[$command]($this->app)->register();
+                var_dump($this->app[$command]);
+                $this->app[$command]->register();
             }
         };
     }

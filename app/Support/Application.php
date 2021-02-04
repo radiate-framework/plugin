@@ -2,33 +2,19 @@
 
 namespace Plugin\Support;
 
-use ArrayAccess;
 use Plugin\Support\Console\ConsoleServiceProvider;
+use Plugin\Support\Container\Container;
 use Plugin\Support\Filesystem\FilesystemServiceProvider;
 use Plugin\Support\View\ViewServiceProvider;
 
-class Application implements ArrayAccess
+class Application extends Container
 {
-    /**
-     * The app instance
-     *
-     * @var \Plugin\Support\Application
-     */
-    protected static $instance;
-
     /**
      * The base path
      *
      * @var string
      */
     protected $basePath;
-
-    /**
-     * The bound instances
-     *
-     * @var array
-     */
-    protected $instances = [];
 
     /**
      * The registered providers
@@ -94,18 +80,6 @@ class Application implements ArrayAccess
     }
 
     /**
-     * Bind an instance to the app
-     *
-     * @param string $abstract
-     * @param mixed $concrete
-     * @return void
-     */
-    public function instance(string $abstract, $concrete)
-    {
-        $this[$abstract] = $concrete;
-    }
-
-    /**
      * Register a service provider
      *
      * @param string $provider
@@ -145,31 +119,6 @@ class Application implements ArrayAccess
     }
 
     /**
-     * Get the app instance
-     *
-     * @return self
-     */
-    public static function getInstance()
-    {
-        if (is_null(static::$instance)) {
-            static::$instance = new static;
-        }
-
-        return static::$instance;
-    }
-
-    /**
-     * Set the app instance
-     *
-     * @param \Plugin\Support\Application $container
-     * @return self
-     */
-    public static function setInstance(Application $app = null)
-    {
-        return static::$instance = $app;
-    }
-
-    /**
      * Get the app namespace
      *
      * @return string
@@ -177,61 +126,5 @@ class Application implements ArrayAccess
     public function getNamespace()
     {
         return $this->namespace;
-    }
-
-    /**
-     * Get a bound instance
-     *
-     * @param string $abstract
-     * @return mixed
-     */
-    public function get(string $abstract)
-    {
-        return $this[$abstract];
-    }
-
-    /**
-     * Determine if a bound instance exists
-     *
-     * @param string $key
-     * @return bool
-     */
-    public function offsetExists($key)
-    {
-        return isset($this->instances[$key]);
-    }
-
-    /**
-     * Get a bound instance
-     *
-     * @param string $key
-     * @return mixed
-     */
-    public function offsetGet($key)
-    {
-        return $this->instances[$key];
-    }
-
-    /**
-     * Bind an instance
-     *
-     * @param string $key
-     * @param mixed $value
-     * @return void
-     */
-    public function offsetSet($key, $value)
-    {
-        $this->instances[$key] = $value;
-    }
-
-    /**
-     * Unbind an instance
-     *
-     * @param string $key
-     * @return void
-     */
-    public function offsetUnset($key)
-    {
-        unset($this->instances[$key]);
     }
 }
