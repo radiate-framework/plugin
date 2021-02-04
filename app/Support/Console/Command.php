@@ -2,7 +2,7 @@
 
 namespace Plugin\Support\Console;
 
-use Plugin\Support\Application;
+use Plugin\Support\Foundation\Application;
 use WP_CLI;
 
 abstract class Command
@@ -52,7 +52,7 @@ abstract class Command
     /**
      * The application
      *
-     * @var \Plugin\Support\Application
+     * @var \Plugin\Support\Foundation\Application
      */
     protected $app;
 

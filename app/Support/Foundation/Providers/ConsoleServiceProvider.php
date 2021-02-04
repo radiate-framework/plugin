@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\Support\Console;
+namespace Plugin\Support\Foundation\Providers;
 
 use Plugin\Support\ServiceProvider;
 
@@ -12,8 +12,8 @@ class ConsoleServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        \Plugin\Support\Console\Commands\MakeController::class,
-        \Plugin\Support\Console\Commands\MakeProvider::class,
+        \Plugin\Support\Foundation\Console\MakeController::class,
+        \Plugin\Support\Foundation\Console\MakeProvider::class,
     ];
 
     /**

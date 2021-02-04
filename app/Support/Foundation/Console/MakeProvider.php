@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\Support\Console\Commands;
+namespace Plugin\Support\Foundation\Console;
 
 use Plugin\Support\Console\GeneratorCommand;
 
@@ -19,7 +19,7 @@ class MakeProvider extends GeneratorCommand
      * @var string
      */
     protected $signature = 'make:provider {name : The name of the provider}
-                                            {--force : Overwrite the provider if it exists}';
+                                          {--force : Overwrite the provider if it exists}';
 
     /**
      * The command description.

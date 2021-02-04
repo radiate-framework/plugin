@@ -2,7 +2,7 @@
 
 namespace Plugin\Support\Console;
 
-use Plugin\Support\Application;
+use Plugin\Support\Foundation\Application;
 use Plugin\Support\Filesystem\Filesystem;
 
 abstract class GeneratorCommand extends Command
@@ -100,7 +100,7 @@ abstract class GeneratorCommand extends Command
     /**
      * Assign the filesystem and call the parent contructor.
      *
-     * @param \Plugin\Support\Application $app
+     * @param \Plugin\Support\Foundation\Application $app
      * @param \Plugin\Support\Filesystem\Filesystem $files
      */
     public function __construct(Application $app, Filesystem $files)

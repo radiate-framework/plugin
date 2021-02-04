@@ -1,9 +1,10 @@
 <?php
 
-namespace Plugin\Support;
+namespace Plugin\Support\Foundation;
 
-use Plugin\Support\Console\ConsoleServiceProvider;
 use Plugin\Support\Container\Container;
+use Plugin\Support\Events\EventServiceProvider;
+use Plugin\Support\Foundation\Providers\ConsoleServiceProvider;
 use Plugin\Support\Filesystem\FilesystemServiceProvider;
 use Plugin\Support\View\ViewServiceProvider;
 
@@ -65,6 +66,7 @@ class Application extends Container
     protected function registerCoreProviders()
     {
         $this->register(ConsoleServiceProvider::class);
+        $this->register(EventServiceProvider::class);
         $this->register(FilesystemServiceProvider::class);
         $this->register(ViewServiceProvider::class);
     }

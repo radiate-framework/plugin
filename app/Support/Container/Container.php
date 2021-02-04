@@ -4,8 +4,9 @@ namespace Plugin\Support\Container;
 
 use ArrayAccess;
 use Closure;
+use Psr\Container\ContainerInterface;
 
-class Container implements ArrayAccess
+class Container implements ArrayAccess, ContainerInterface
 {
     /**
      * The container instance
@@ -71,20 +72,9 @@ class Container implements ArrayAccess
      * @param string $abstract
      * @return bool
      */
-    public function has(string $abstract)
+    public function has($abstract)
     {
-        return isset($this->instances[$abstract]);
-    }
-
-    /**
-     * Determine if the abstract is registered to the container
-     *
-     * @param string $abstract
-     * @return bool
-     */
-    public function bound(string $abstract)
-    {
-        return isset($this->bindings[$abstract]);
+        return isset($this->instances[$abstract]) || isset($this->bindings[$abstract]);
     }
 
     /**
@@ -93,25 +83,30 @@ class Container implements ArrayAccess
      * @param string $abstract
      * @return mixed
      *
-     * @throws \Plugin\Support\Container\EntryNotFoundException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function get(string $abstract)
+    public function get($abstract)
     {
-        if ($this->has($abstract)) {
-            return $this->instances[$abstract];
-        }
-
-        if ($this->bound($abstract)) {
-            if ($this->bindings[$abstract]['shared']) {
-                $this[$abstract] = $this->bindings[$abstract]['concrete']($this);
-
-                return $this[$abstract];
+        try {
+            if (isset($this->instances[$abstract])) {
+                return $this->instances[$abstract];
             }
 
-            return $this->bindings[$abstract]['concrete']($this);
-        }
+            if (isset($this->bindings[$abstract])) {
+                if ($this->bindings[$abstract]['shared']) {
+                    return $this->instances[$abstract] = $this->bindings[$abstract]['concrete']($this);
+                }
 
-        throw new EntryNotFoundException('not bound');
+                return $this->bindings[$abstract]['concrete']($this);
+            }
+        } catch (ContainerException $e) {
+            if ($this->has($abstract)) {
+                throw $e;
+            }
+
+            throw new NotFoundException($abstract, $e->getCode(), $e);
+        }
     }
 
     /**

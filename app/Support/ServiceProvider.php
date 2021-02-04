@@ -2,21 +2,21 @@
 
 namespace Plugin\Support;
 
-use Plugin\Support\Application;
+use Plugin\Support\Foundation\Application;
 
 abstract class ServiceProvider
 {
     /**
      * The app instance
      *
-     * @var \Plugin\Support\Application
+     * @var \Plugin\Support\Foundation\Application
      */
     protected $app;
 
     /**
      * Create the provider
      *
-     * @param \Plugin\Support\Application $app
+     * @param \Plugin\Support\Foundation\Application $app
      */
     public function __construct(Application $app)
     {

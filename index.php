@@ -12,8 +12,9 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$app = new Plugin\Support\Application(__DIR__);
+$app = new Plugin\Support\Foundation\Application(__DIR__);
 
+$app->register(Plugin\Providers\EventServiceProvider::class);
 $app->register(Plugin\Providers\PluginServiceProvider::class);
 
 $app->boot();

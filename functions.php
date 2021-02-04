@@ -2,7 +2,7 @@
 
 namespace Plugin;
 
-use Plugin\Support\Application;
+use Plugin\Support\Foundation\Application;
 
 /**
  * This file is for all the plugin helper functions. Functions should be called

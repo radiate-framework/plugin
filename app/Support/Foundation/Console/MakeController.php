@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\Support\Console\Commands;
+namespace Plugin\Support\Foundation\Console;
 
 use Plugin\Support\Console\GeneratorCommand;
 
