@@ -158,7 +158,7 @@ abstract class Command
     }
 
     /**
-     * Dispaly an error message
+     * Display an error message
      *
      * @param string $message
      * @return void
