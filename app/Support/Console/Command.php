@@ -147,6 +147,17 @@ abstract class Command
     }
 
     /**
+     * Display a message
+     *
+     * @param string $message
+     * @return void
+     */
+    protected function line(string $message)
+    {
+        WP_CLI::log($message);
+    }
+
+    /**
      * Dispaly an error message
      *
      * @param string $message

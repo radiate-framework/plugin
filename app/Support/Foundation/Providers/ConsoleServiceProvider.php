@@ -17,6 +17,7 @@ class ConsoleServiceProvider extends ServiceProvider
         \Plugin\Support\Foundation\Console\MakeListener::class,
         \Plugin\Support\Foundation\Console\MakeProvider::class,
         \Plugin\Support\Foundation\Console\MakeSubscriber::class,
+        \Plugin\Support\Foundation\Console\VendorPublish::class,
     ];
 
     /**
@@ -40,7 +41,7 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (class_exists('WP_CLI')) {
+        if ($this->app->runningInConsole()) {
             foreach ($this->commands as $command) {
                 $this->app[$command]->register();
             }
