@@ -129,4 +129,14 @@ class Application extends Container
     {
         return $this->namespace;
     }
+
+    /**
+     * Determine if the app is running in the console
+     *
+     * @return bool
+     */
+    public function runningInConsole()
+    {
+        return class_exists('WP_CLI');
+    }
 }
