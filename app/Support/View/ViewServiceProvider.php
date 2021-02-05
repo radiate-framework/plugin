@@ -3,7 +3,6 @@
 namespace Plugin\Support\View;
 
 use Plugin\Support\ServiceProvider;
-use Plugin\Support\View\View;
 
 class ViewServiceProvider extends ServiceProvider
 {
