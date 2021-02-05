@@ -101,7 +101,7 @@ class Application extends Container
      *
      * @return void
      */
-    public function bootProviders()
+    protected function bootProviders()
     {
         foreach ($this->providers as $provider) {
             if (method_exists($provider, 'boot')) {
