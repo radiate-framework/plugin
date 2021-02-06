@@ -6,6 +6,7 @@ use Plugin\Support\Container\Container;
 use Plugin\Support\Events\EventServiceProvider;
 use Plugin\Support\Foundation\Providers\ConsoleServiceProvider;
 use Plugin\Support\Filesystem\FilesystemServiceProvider;
+use Plugin\Support\Http\Request;
 use Plugin\Support\View\ViewServiceProvider;
 
 class Application extends Container
@@ -111,12 +112,24 @@ class Application extends Container
     }
 
     /**
+     * Capture the server request
+     *
+     * @return void
+     */
+    protected function captureRequest()
+    {
+        $this->instance('request', Request::capture());
+    }
+
+    /**
      * Boot the application
      *
      * @return void
      */
     public function boot()
     {
+        $this->captureRequest();
+
         $this->bootProviders();
     }
 
