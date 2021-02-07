@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use {{ rootNamespace }}\Support\ServiceProvider;
+use {{ rootNamespace }}Support\ServiceProvider;
 
 class {{ class }} extends ServiceProvider
 {
