@@ -2,14 +2,14 @@
 
 namespace {{ namespace }};
 
-use {{ rootNamespace }}\Support\Events\Dispatcher;
+use {{ rootNamespace }}Support\Events\Dispatcher;
 
 class {{ class }}
 {
     /**
      * Register the listeners for the subscriber.
      *
-     * @param \{{ rootNamespace }}\Support\Events\Dispatcher $events
+     * @param \{{ rootNamespace }}Support\Events\Dispatcher $events
      * @return void
      */
     public function subscribe(Dispatcher $events): void

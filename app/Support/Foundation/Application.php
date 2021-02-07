@@ -33,7 +33,7 @@ class Application extends Container
      *
      * @var string
      */
-    protected $namespace = 'Plugin';
+    protected $namespace = 'Plugin\\';
 
     /**
      * The global middleware

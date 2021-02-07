@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ rootNamespace }}Support\Http\AjaxController as Controller;
+
+class {{ class }} extends Controller
+{
+    /**
+     * The AJAX action
+     *
+     * @var string
+     */
+    protected $action = '';
+
+    /**
+     * Handle the controller action
+     *
+     * @return void
+     */
+    public function handle()
+    {
+        //
+    }
+}
