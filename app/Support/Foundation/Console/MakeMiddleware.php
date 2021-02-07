@@ -4,30 +4,29 @@ namespace Plugin\Support\Foundation\Console;
 
 use Plugin\Support\Console\GeneratorCommand;
 
-class MakeController extends GeneratorCommand
+class MakeMiddleware extends GeneratorCommand
 {
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Controller';
+    protected $type = 'Middleware';
 
     /**
      * The command signature.
      *
      * @var string
      */
-    protected $signature = 'make:controller {name : The name of the controller}
-                                            {--rest : Generate a REST controller}
-                                            {--force : Overwrite the controller if it exists}';
+    protected $signature = 'make:middleware {name : The name of the middleware}
+                                            {--force : Overwrite the middleware if it exists}';
 
     /**
      * The command description.
      *
      * @var string
      */
-    protected $description = 'Make a controller';
+    protected $description = 'Make a middleware';
 
     /**
      * Get the stub path.
@@ -36,11 +35,7 @@ class MakeController extends GeneratorCommand
      */
     protected function getStub()
     {
-        if ($this->option('rest')) {
-            return __DIR__ . '/stubs/controller-rest.stub';
-        }
-
-        return __DIR__ . '/stubs/controller-ajax.stub';
+        return __DIR__ . '/stubs/middleware.stub';
     }
 
     /**
@@ -51,6 +46,6 @@ class MakeController extends GeneratorCommand
      */
     protected function getDefaultNamespace(string $rootNamespace)
     {
-        return $rootNamespace . '\\Http\\Controllers';
+        return $rootNamespace . '\\Http\\Middleware';
     }
 }

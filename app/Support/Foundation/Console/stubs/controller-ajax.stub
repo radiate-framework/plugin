@@ -1,0 +1,43 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ rootNamespace }}\Support\Http\Request;
+use {{ rootNamespace }}\Support\Routing\AjaxController as Controller;
+
+class {{ class }} extends Controller
+{
+    /**
+     * The AJAX action
+     *
+     * @var string
+     */
+    protected $action = '';
+
+    /**
+     * The route guards
+     *
+     * @var array
+     */
+    protected $guards = ['AUTH', 'GUEST'];
+
+    /**
+     * The route middleware
+     *
+     * @var array
+     */
+    protected $middleware = [
+        //
+    ];
+
+    /**
+     * Handle the controller action
+     *
+     * @param \{{ rootNamespace }}\Support\Http\Request $request
+     * @return mixed
+     */
+    public function handle(Request $request)
+    {
+        //
+    }
+}

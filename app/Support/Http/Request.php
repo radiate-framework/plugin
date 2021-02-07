@@ -153,6 +153,49 @@ class Request implements ArrayAccess, JsonSerializable
     }
 
     /**
+     * Merge the attributes into the request
+     *
+     * @param array $attributes
+     * @return self
+     */
+    public function merge(array $attributes)
+    {
+        $this->request = array_merge($this->request, $attributes);
+
+        return $this;
+    }
+
+    /**
+     * Determine if the request was made with AJAX
+     *
+     * @return bool
+     */
+    public function ajax()
+    {
+        return $this->header('X_REQUESTED_WITH') == 'XMLHttpRequest';
+    }
+
+    /**
+     * Determine if the request can accept a JSON response
+     *
+     * @return bool
+     */
+    public function wantsJson()
+    {
+        return strpos($this->header('ACCEPT', '*/*'), '/json') !== false;
+    }
+
+    /**
+     * Determine if the request expects a JSON response
+     *
+     * @return bool
+     */
+    public function expectsJson()
+    {
+        return $this->ajax() || $this->wantsJson();
+    }
+
+    /**
      * Determine if the attribute exists
      *
      * @param string $key

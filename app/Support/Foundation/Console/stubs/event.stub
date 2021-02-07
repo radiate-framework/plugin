@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use Plugin\Support\Foundation\Events\Dispatchable;
+use {{ rootNamespace }}\Support\Foundation\Events\Dispatchable;
 
 class {{ class }}
 {
