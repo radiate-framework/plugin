@@ -2,8 +2,8 @@
 
 namespace {{ namespace }};
 
-use {{ rootNamespace }}\Support\Http\Request;
-use {{ rootNamespace }}\Support\Routing\RestController as Controller;
+use {{ rootNamespace }}Support\Http\Request;
+use {{ rootNamespace }}Support\Routing\RestController as Controller;
 
 class {{ class }} extends Controller
 {
@@ -40,7 +40,7 @@ class {{ class }} extends Controller
     /**
      * Handle the controller action
      *
-     * @param \{{ rootNamespace }}\Support\Http\Request $request
+     * @param \{{ rootNamespace }}Support\Http\Request $request
      * @return mixed
      */
     public function handle(Request $request)
