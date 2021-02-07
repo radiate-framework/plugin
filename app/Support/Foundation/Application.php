@@ -57,6 +57,8 @@ class Application extends Container
         static::setInstance($this);
 
         $this->instance('app', $this);
+
+        $this->instance('env', wp_get_environment_type());
     }
 
     /**
@@ -151,5 +153,60 @@ class Application extends Container
     public function runningInConsole()
     {
         return class_exists('WP_CLI');
+    }
+
+    /**
+     * Get or check the current application environment.
+     *
+     * @param  string|array|null  $environments
+     * @return string|bool
+     */
+    public function environment($environments = null)
+    {
+        if ($environments) {
+            return in_array($this['env'], (array) $environments);
+        }
+
+        return $this['env'];
+    }
+
+    /**
+     * Determine if the app is in a local environment
+     *
+     * @return bool
+     */
+    public function isLocal()
+    {
+        return $this['env'] == 'local';
+    }
+
+    /**
+     * Determine if the app is in a development environment
+     *
+     * @return bool
+     */
+    public function isDevelopment()
+    {
+        return $this['env'] == 'development';
+    }
+
+    /**
+     * Determine if the app is in a staging environment
+     *
+     * @return bool
+     */
+    public function isStaging()
+    {
+        return $this['env'] == 'staging';
+    }
+
+    /**
+     * Determine if the app is in a production environment
+     *
+     * @return bool
+     */
+    public function isProduction()
+    {
+        return $this['env'] == 'production';
     }
 }
