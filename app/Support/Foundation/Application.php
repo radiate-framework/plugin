@@ -30,7 +30,7 @@ class Application extends Container
      *
      * @var string
      */
-    protected $namespace = 'Plugin';
+    protected $namespace = 'Plugin\\';
 
     /**
      * Create the applicaiton

@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use {{ rootNamespace }}\Support\Http\AjaxController as Controller;
+use {{ rootNamespace }}Support\Http\AjaxController as Controller;
 
 class {{ class }} extends Controller
 {
