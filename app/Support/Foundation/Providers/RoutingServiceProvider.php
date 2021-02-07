@@ -21,7 +21,7 @@ class RoutingServiceProvider extends ServiceProvider
     public function boot()
     {
         foreach ($this->controllers as $controller) {
-            $route = (new $controller($this->app['events'], $this->app));
+            $route = new $controller($this->app['events'], $this->app);
 
             $route->dispatch($this->app['request']);
         }

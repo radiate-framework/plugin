@@ -4,7 +4,6 @@ namespace Plugin\Support\Foundation\Exceptions;
 
 use Throwable;
 use Plugin\Support\Foundation\Application;
-use Plugin\Support\Http\Exceptions\AuthenticationException;
 use Plugin\Support\Http\Request;
 
 class Handler
@@ -22,7 +21,7 @@ class Handler
     /**
      * Render an HTTP exception
      *
-     * @param \Public\Support\Http\Request $request
+     * @param \Plugin\Support\Http\Request $request
      * @param \Throwable $e
      * @return string
      */

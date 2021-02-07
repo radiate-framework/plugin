@@ -208,7 +208,7 @@ class Application extends Container
     /**
      * Render an HTTP exception
      *
-     * @param \Public\Support\Http\Request $request
+     * @param \Plugin\Support\Http\Request $request
      * @param \Throwable $e
      * @return string
      */
