@@ -2,16 +2,22 @@
 
 namespace Plugin\Support\Foundation\Providers;
 
+use Plugin\Support\Routing\Router;
 use Plugin\Support\ServiceProvider;
 
 class RoutingServiceProvider extends ServiceProvider
 {
     /**
-     * The route controllers
+     * Register the provider
      *
-     * @var array
+     * @return void
      */
-    protected $controllers = [];
+    public function register()
+    {
+        $this->app->singleton('router', function ($app) {
+            return new Router($app['events']);
+        });
+    }
 
     /**
      * Boot the provider
@@ -20,10 +26,18 @@ class RoutingServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        foreach ($this->controllers as $controller) {
-            $route = new $controller($this->app['events'], $this->app);
+        $this->map();
 
-            $route->dispatch($this->app['request']);
-        }
+        $this->app['router']->dispatch($this->app['request']);
+    }
+
+    /**
+     * Map the routes
+     *
+     * @return void
+     */
+    public function map()
+    {
+        //
     }
 }

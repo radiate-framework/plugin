@@ -7,11 +7,42 @@ use Plugin\Support\Foundation\Providers\RoutingServiceProvider as ServiceProvide
 class RoutingServiceProvider extends ServiceProvider
 {
     /**
-     * The route controllers
+     * The REST API namespace
      *
-     * @var array
+     * @var string
      */
-    protected $controllers = [
-        //
-    ];
+    protected $namespace = 'api';
+
+    /**
+     * Map the routes
+     *
+     * @return void
+     */
+    public function map()
+    {
+        $this->mapAjaxRoutes();
+
+        $this->mapApiRoutes();
+    }
+
+    /**
+     * Map the AJAX routes
+     *
+     * @return void
+     */
+    public function mapAjaxRoutes()
+    {
+        $this->app['router']->group($this->app->basePath('routes/ajax.php'));
+    }
+
+    /**
+     * Map the API routes
+     *
+     * @return void
+     */
+    public function mapApiRoutes()
+    {
+        $this->app['router']->namespace($this->namespace)
+            ->group($this->app->basePath('routes/api.php'));
+    }
 }
