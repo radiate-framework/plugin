@@ -11,6 +11,7 @@ use Plugin\Support\Filesystem\FilesystemServiceProvider;
 use Plugin\Support\Http\Request;
 use Plugin\Support\Routing\Pipeline;
 use Plugin\Support\View\ViewServiceProvider;
+use RuntimeException;
 use Throwable;
 
 class Application extends Container
@@ -34,7 +35,7 @@ class Application extends Container
      *
      * @var string
      */
-    protected $namespace = 'Plugin\\';
+    protected $namespace;
 
     /**
      * The global middleware
@@ -92,10 +93,13 @@ class Application extends Container
     protected function registerCoreProviders()
     {
         $this->register(AuthServiceProvider::class);
-        $this->register(ConsoleServiceProvider::class);
         $this->register(EventServiceProvider::class);
         $this->register(FilesystemServiceProvider::class);
         $this->register(ViewServiceProvider::class);
+
+        if ($this->runningInConsole()) {
+            $this->register(ConsoleServiceProvider::class);
+        }
     }
 
     /**
@@ -226,10 +230,26 @@ class Application extends Container
      * Get the app namespace
      *
      * @return string
+     *
+     * @throws \RuntimeException
      */
     public function getNamespace()
     {
-        return $this->namespace;
+        if ($this->namespace) {
+            return $this->namespace;
+        }
+
+        $composer = json_decode($this['files']->get($this->basePath('composer.json')), true);
+
+        if ($composer['autoload'] && $loader = $composer['autoload']['psr-4']) {
+            foreach ($loader as $namespace => $path) {
+                if (realpath($this->basePath('app')) === realpath($this->basePath($path))) {
+                    return $this->namespace = $namespace;
+                }
+            }
+        }
+
+        throw new RuntimeException('Unable to detect application namespace.');
     }
 
     /**

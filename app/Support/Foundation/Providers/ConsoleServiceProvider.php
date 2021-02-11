@@ -42,10 +42,8 @@ class ConsoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->app->runningInConsole()) {
-            foreach ($this->commands as $command) {
-                $this->app[$command]->register();
-            }
-        };
+        foreach ($this->commands as $command) {
+            $this->app[$command]->register();
+        }
     }
 }
