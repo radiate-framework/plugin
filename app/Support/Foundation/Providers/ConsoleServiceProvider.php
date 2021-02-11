@@ -12,13 +12,13 @@ class ConsoleServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        \Plugin\Support\Foundation\Console\MakeController::class,
-        \Plugin\Support\Foundation\Console\MakeEvent::class,
-        \Plugin\Support\Foundation\Console\MakeListener::class,
-        \Plugin\Support\Foundation\Console\MakeMiddleware::class,
+        \Plugin\Support\Events\Console\MakeEvent::class,
+        \Plugin\Support\Events\Console\MakeListener::class,
+        \Plugin\Support\Events\Console\MakeSubscriber::class,
         \Plugin\Support\Foundation\Console\MakeProvider::class,
-        \Plugin\Support\Foundation\Console\MakeSubscriber::class,
         \Plugin\Support\Foundation\Console\VendorPublish::class,
+        \Plugin\Support\Routing\Console\MakeController::class,
+        \Plugin\Support\Routing\Console\MakeMiddleware::class,
     ];
 
     /**
