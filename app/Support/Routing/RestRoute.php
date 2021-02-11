@@ -15,7 +15,7 @@ class RestRoute extends Route
      */
     public function dispatch(Request $request)
     {
-        $this->router->events->listen('rest_api_init', function () use ($request) {
+        $this->router->listen('rest_api_init', function () use ($request) {
             register_rest_route($this->namespace(), $this->parseUri($this->uri), [
                 'methods'             => $this->methods(),
                 'callback'            => $this->handle($request),
@@ -26,7 +26,7 @@ class RestRoute extends Route
 
     public function namespace()
     {
-        return $this->group['namespace'] ?? 'api';
+        return $this->attributes['namespace'] ?? 'api';
     }
 
     /**
@@ -37,7 +37,7 @@ class RestRoute extends Route
      */
     protected function parseUri(string $uri): string
     {
-        return preg_replace('@\/\{([\w]+?)(\?)?\}@', '\/?(?P<$1>[\w-]+)$2', $uri);
+        return preg_replace('@\/\{([\w]+?)(\?)?\}@', '\/?(?P<$1>[\w-]+)$2', $this->attributes['prefix'] . '/' . $uri);
     }
 
     /**

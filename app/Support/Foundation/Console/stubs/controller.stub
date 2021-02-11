@@ -2,24 +2,19 @@
 
 namespace {{ namespace }};
 
-use {{ rootNamespace }}Support\Http\AjaxController as Controller;
+use {{ rootNamespace }}Support\Http\Request;
+use {{ rootNamespace }}Support\Routing\Controller;
 
 class {{ class }} extends Controller
 {
     /**
-     * The AJAX action
-     *
-     * @var string
-     */
-    protected $action = '';
-
-    /**
      * Handle the controller action
      *
-     * @return void
+     * @param \{{ rootNamespace }}Support\Http\Request $request
+     * @return mixed
      */
-    public function handle()
+    public function __invoke(Request $request)
     {
-        //
+        return $request;
     }
 }

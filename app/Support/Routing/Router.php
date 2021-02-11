@@ -4,6 +4,7 @@ namespace Plugin\Support\Routing;
 
 use Closure;
 use Plugin\Support\Events\Dispatcher;
+use Plugin\Support\Foundation\Application;
 use Plugin\Support\Http\Request;
 
 class Router
@@ -11,9 +12,16 @@ class Router
     /**
      * The events instance
      *
+     * @var \Plugin\Support\Foundation\Application
+     *
+     */
+    public $app;
+    /**
+     * The events instance
+     *
      * @var \Plugin\Support\Events\Dispatcher
      */
-    public $events;
+    protected $events;
 
     /**
      * The router group stack
@@ -40,10 +48,12 @@ class Router
      * Create the router instance
      *
      * @param \Plugin\Support\Events\Dispatcher $events
+     * @param \Plugin\Support\Foundation\Application $app
      */
-    public function __construct(Dispatcher $events)
+    public function __construct(Dispatcher $events, Application $app)
     {
         $this->events = $events;
+        $this->app = $app;
     }
 
     /**
@@ -55,11 +65,11 @@ class Router
      */
     public function ajax(string $uri, $action)
     {
-        return $this->addRoute(new AjaxRoute(['AUTH', 'GUEST'], $uri, $action));
+        return $this->addRoute(new AjaxRoute('AJAX', $uri, $action));
     }
 
     /**
-     * Create an ajax route
+     * Create an GET route
      *
      * @param string $uri
      * @param \Closure $action
@@ -68,6 +78,83 @@ class Router
     public function get(string $uri, $action)
     {
         return $this->addRoute(new RestRoute(['GET', 'HEAD'], $uri, $action));
+    }
+
+    /**
+     * Create a POST route
+     *
+     * @param string $uri
+     * @param \Closure $action
+     * @return void
+     */
+    public function post(string $uri, $action)
+    {
+        return $this->addRoute(new RestRoute('POST', $uri, $action));
+    }
+
+    /**
+     * Create a PUT route
+     *
+     * @param string $uri
+     * @param \Closure $action
+     * @return void
+     */
+    public function put(string $uri, $action)
+    {
+        return $this->addRoute(new RestRoute('PUT', $uri, $action));
+    }
+
+    /**
+     * Create a PATCH route
+     *
+     * @param string $uri
+     * @param \Closure $action
+     * @return void
+     */
+    public function patch(string $uri, $action)
+    {
+        return $this->addRoute(new RestRoute('PATCH', $uri, $action));
+    }
+
+    /**
+     * Create a DELETE route
+     *
+     * @param string $uri
+     * @param \Closure $action
+     * @return void
+     */
+    public function delete(string $uri, $action)
+    {
+        return $this->addRoute(new RestRoute('DELETE', $uri, $action));
+    }
+
+    /**
+     * Create an route with any method
+     *
+     * @param string $uri
+     * @param \Closure $action
+     * @return void
+     */
+    public function any(string $uri, $action)
+    {
+        return $this->addRoute(new RestRoute(['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'], $uri, $action));
+    }
+
+    /**
+     * Create an route matching the given methods
+     *
+     * @param array $methods
+     * @param string $uri
+     * @param \Closure $action
+     * @return void
+     */
+    public function matches(array $methods, string $uri, $action)
+    {
+        if (in_array('GET', $methods) && !in_array('HEAD', $methods)) {
+            $methods[] = 'HEAD';
+        }
+
+        return $this->addRoute(new RestRoute($methods, $uri, $action));
     }
 
     /**
@@ -80,9 +167,46 @@ class Router
     {
         $this->routes[] = $route;
 
-        // $route->addMiddlewareAndPrefix()
+        if ($this->hasGroupStack()) {
+            $this->mergeGroupAttributesIntoRoute($route);
+        }
 
         return $route;
+    }
+
+    /**
+     * Determine if the router currently has a group stack.
+     *
+     * @return bool
+     */
+    public function hasGroupStack()
+    {
+        return !empty($this->groupStack);
+    }
+
+    /**
+     * Merge the group stack with the controller action.
+     *
+     * @param  \Plugin\Support\Routing\Route  $route
+     * @return void
+     */
+    protected function mergeGroupAttributesIntoRoute($route)
+    {
+        $route->setGroupAttributes($this->getMergedGroupStack());
+    }
+
+    /**
+     * Return the merged group stack
+     *
+     * @return array
+     */
+    public function getMergedGroupStack()
+    {
+        return [
+            'middleware' => $this->getMiddleware(),
+            'prefix'     => $this->getPrefix(),
+            'namespace'  => $this->getNamespace(),
+        ];
     }
 
     /**
@@ -105,7 +229,21 @@ class Router
      */
     public function getMiddleware()
     {
-        return array_column($this->groupStack, 'middleware');
+        $routeMiddleware = $this->app->getRouteMiddleware();
+
+        $middleware = [];
+
+        foreach (array_column($this->groupStack, 'middleware') as $aliases) {
+            foreach ($aliases as $alias) {
+                if ($wares = $routeMiddleware[$alias]) {
+                    foreach ((array) $wares as $ware) {
+                        $middleware[] = $ware ?? null;
+                    }
+                }
+            }
+        };
+
+        return array_unique($middleware);
     }
 
     /**
@@ -164,13 +302,13 @@ class Router
     {
         $this->groupStack[] = $this->currentGroup;
 
+        $this->currentGroup = [];
+
         $callback = $this->resolveGroupCallback($callback);
 
         $callback($this);
 
         array_pop($this->groupStack);
-
-        $this->currentGroup = [];
     }
 
     /**
@@ -181,7 +319,7 @@ class Router
      */
     protected function resolveGroupCallback($callback)
     {
-        return $callback instanceof Closure ?: function ($router) use ($callback) {
+        return $callback instanceof Closure ? $callback : function ($router) use ($callback) {
             require $callback;
         };
     }
@@ -195,7 +333,14 @@ class Router
     public function dispatch(Request $request)
     {
         foreach ($this->routes as $route) {
-            $route->setRouter($this)->dispatch($request);
+            $route->setRouter($this)
+                ->setContainer($this->app)
+                ->dispatch($request);
         }
+    }
+
+    public function listen(string $event, $callback)
+    {
+        $this->events->listen($event, $callback);
     }
 }

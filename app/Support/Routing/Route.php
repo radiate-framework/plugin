@@ -2,18 +2,25 @@
 
 namespace Plugin\Support\Routing;
 
+use Plugin\Support\Foundation\Application;
 use Throwable;
 use Plugin\Support\Http\Request;
-use WP_REST_Request;
 
 abstract class Route
 {
     /**
      * The router instance
      *
-     * @var Plugin\Support\Routing\Router
+     * @var \Plugin\Support\Routing\Router
      */
     protected $router;
+
+    /**
+     * The router instance
+     *
+     * @var \Plugin\Support\Foundation\Application
+     */
+    protected $app;
 
     /**
      * The route methods
@@ -76,6 +83,11 @@ abstract class Route
         return $this->methods;
     }
 
+    public function setGroupAttributes(array $attributes)
+    {
+        $this->attributes = $attributes;
+    }
+
     /**
      * Set the router
      *
@@ -90,6 +102,19 @@ abstract class Route
     }
 
     /**
+     * Set the container
+     *
+     * @param \Plugin\Support\Routing\Application $app
+     * @return self
+     */
+    public function setContainer(Application $app)
+    {
+        $this->app = $app;
+
+        return $this;
+    }
+
+    /**
      * Handle the controller action
      *
      * @return mixed
@@ -99,7 +124,7 @@ abstract class Route
         try {
             $response = (new Pipeline())
                 ->send($request)
-                ->through($this->middleware ?? [])
+                ->through($this->attributes['middleware'] ?? [])
                 ->then(function ($request) {
                     return call_user_func($this->action, $request);
                 });

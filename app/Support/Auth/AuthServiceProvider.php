@@ -17,4 +17,16 @@ class AuthServiceProvider extends ServiceProvider
             return new AuthManager();
         });
     }
+
+    /**
+     * Boot the services
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->app['request']->setUserResolver(function () {
+            return $this->app['auth']->user();
+        });
+    }
 }

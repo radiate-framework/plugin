@@ -19,7 +19,6 @@ class MakeController extends GeneratorCommand
      * @var string
      */
     protected $signature = 'make:controller {name : The name of the controller}
-                                            {--rest : Generate a REST controller}
                                             {--force : Overwrite the controller if it exists}';
 
     /**
@@ -36,11 +35,7 @@ class MakeController extends GeneratorCommand
      */
     protected function getStub()
     {
-        if ($this->option('rest')) {
-            return __DIR__ . '/stubs/controller-rest.stub';
-        }
-
-        return __DIR__ . '/stubs/controller-ajax.stub';
+        return __DIR__ . '/stubs/controller.stub';
     }
 
     /**

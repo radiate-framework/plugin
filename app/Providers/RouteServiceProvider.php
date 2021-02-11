@@ -2,17 +2,10 @@
 
 namespace Plugin\Providers;
 
-use Plugin\Support\Foundation\Providers\RoutingServiceProvider as ServiceProvider;
+use Plugin\Support\Foundation\Providers\RouteServiceProvider as ServiceProvider;
 
-class RoutingServiceProvider extends ServiceProvider
+class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * The REST API namespace
-     *
-     * @var string
-     */
-    protected $namespace = 'api';
-
     /**
      * Map the routes
      *
@@ -32,7 +25,8 @@ class RoutingServiceProvider extends ServiceProvider
      */
     public function mapAjaxRoutes()
     {
-        $this->app['router']->group($this->app->basePath('routes/ajax.php'));
+        $this->router()
+            ->group($this->app->basePath('routes/ajax.php'));
     }
 
     /**
@@ -42,7 +36,8 @@ class RoutingServiceProvider extends ServiceProvider
      */
     public function mapApiRoutes()
     {
-        $this->app['router']->namespace($this->namespace)
+        $this->router()
+            ->namespace('api')
             ->group($this->app->basePath('routes/api.php'));
     }
 }

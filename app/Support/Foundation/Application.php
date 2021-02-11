@@ -2,7 +2,7 @@
 
 namespace Plugin\Support\Foundation;
 
-use Throwable;
+use Plugin\Support\Auth\AuthServiceProvider;
 use Plugin\Support\Container\Container;
 use Plugin\Support\Events\EventServiceProvider;
 use Plugin\Support\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -11,6 +11,7 @@ use Plugin\Support\Filesystem\FilesystemServiceProvider;
 use Plugin\Support\Http\Request;
 use Plugin\Support\Routing\Pipeline;
 use Plugin\Support\View\ViewServiceProvider;
+use Throwable;
 
 class Application extends Container
 {
@@ -40,7 +41,14 @@ class Application extends Container
      *
      * @var array
      */
-    protected $globalMiddleware = [];
+    protected $middleware = [];
+
+    /**
+     * The route middleware
+     *
+     * @var array
+     */
+    protected $routeMiddleware = [];
 
     /**
      * Create the applicaiton
@@ -80,6 +88,7 @@ class Application extends Container
      */
     protected function registerCoreProviders()
     {
+        $this->register(AuthServiceProvider::class);
         $this->register(ConsoleServiceProvider::class);
         $this->register(EventServiceProvider::class);
         $this->register(FilesystemServiceProvider::class);
@@ -147,7 +156,7 @@ class Application extends Container
         try {
             $response = (new Pipeline())
                 ->send($request)
-                ->through($this->globalMiddleware)
+                ->through($this->middleware)
                 ->then(function ($request) {
                     $this->instance('request', $request);
 
@@ -163,12 +172,37 @@ class Application extends Container
     /**
      * Add a global middleware to the app
      *
-     * @param mixed $middleware
-     * @return void
+     * @param array $middleware
+     * @return self
      */
-    public function middleware($middleware)
+    public function middleware(array $middleware)
     {
-        $this->globalMiddleware[] = $middleware;
+        $this->middleware = array_unique(array_merge($this->middleware, $middleware));
+
+        return $this;
+    }
+
+    /**
+     * Add a global middleware to the app
+     *
+     * @param array $middleware
+     * @return self
+     */
+    public function routeMiddleware(array $middleware)
+    {
+        $this->routeMiddleware = array_merge($this->routeMiddleware, $middleware);
+
+        return $this;
+    }
+
+    /**
+     * Get the route middleware
+     *
+     * @return array
+     */
+    public function getRouteMiddleware()
+    {
+        return $this->routeMiddleware;
     }
 
     /**

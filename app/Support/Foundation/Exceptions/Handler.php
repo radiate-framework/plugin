@@ -4,6 +4,7 @@ namespace Plugin\Support\Foundation\Exceptions;
 
 use Throwable;
 use Plugin\Support\Foundation\Application;
+use Plugin\Support\Foundation\Http\Exceptions\HttpResponseException;
 use Plugin\Support\Http\Request;
 
 class Handler
@@ -30,5 +31,9 @@ class Handler
         // run through the variations of exceptions to be thrown and handle them
         // either from the exception itself or within the handler.
         // the response should be a string with headers and status set.
+        if ($e instanceof HttpResponseException) {
+            return $e->getResponse();
+        }
+        return $e->getMessage();
     }
 }
