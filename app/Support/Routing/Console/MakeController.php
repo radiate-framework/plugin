@@ -1,32 +1,32 @@
 <?php
 
-namespace Plugin\Support\Foundation\Console;
+namespace Plugin\Support\Routing\Console;
 
 use Plugin\Support\Console\GeneratorCommand;
 
-class MakeListener extends GeneratorCommand
+class MakeController extends GeneratorCommand
 {
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Listener';
+    protected $type = 'Controller';
 
     /**
      * The command signature.
      *
      * @var string
      */
-    protected $signature = 'make:listener {name : The name of the listener}
-                                          {--force : Overwrite the listener if it exists}';
+    protected $signature = 'make:controller {name : The name of the controller}
+                                            {--force : Overwrite the controller if it exists}';
 
     /**
      * The command description.
      *
      * @var string
      */
-    protected $description = 'Make a listener';
+    protected $description = 'Make a controller';
 
     /**
      * Get the stub path.
@@ -35,7 +35,7 @@ class MakeListener extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/stubs/listener.stub';
+        return __DIR__ . '/stubs/controller.stub';
     }
 
     /**
@@ -46,6 +46,6 @@ class MakeListener extends GeneratorCommand
      */
     protected function getDefaultNamespace(string $rootNamespace)
     {
-        return $rootNamespace . '\\Listeners';
+        return $rootNamespace . '\\Http\\Controllers';
     }
 }
