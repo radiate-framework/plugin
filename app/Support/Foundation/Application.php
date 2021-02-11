@@ -2,12 +2,16 @@
 
 namespace Plugin\Support\Foundation;
 
+use Plugin\Support\Auth\AuthServiceProvider;
 use Plugin\Support\Container\Container;
 use Plugin\Support\Events\EventServiceProvider;
+use Plugin\Support\Foundation\Exceptions\Handler as ExceptionHandler;
 use Plugin\Support\Foundation\Providers\ConsoleServiceProvider;
 use Plugin\Support\Filesystem\FilesystemServiceProvider;
 use Plugin\Support\Http\Request;
+use Plugin\Support\Routing\Pipeline;
 use Plugin\Support\View\ViewServiceProvider;
+use Throwable;
 
 class Application extends Container
 {
@@ -31,6 +35,20 @@ class Application extends Container
      * @var string
      */
     protected $namespace = 'Plugin\\';
+
+    /**
+     * The global middleware
+     *
+     * @var array
+     */
+    protected $middleware = [];
+
+    /**
+     * The route middleware
+     *
+     * @var array
+     */
+    protected $routeMiddleware = [];
 
     /**
      * Create the applicaiton
@@ -57,8 +75,13 @@ class Application extends Container
         static::setInstance($this);
 
         $this->instance('app', $this);
+        $this->instance(self::class, $this);
 
         $this->instance('env', wp_get_environment_type());
+
+        $this->singleton(ExceptionHandler::class, function ($app) {
+            return new ExceptionHandler($app);
+        });
     }
 
     /**
@@ -68,6 +91,7 @@ class Application extends Container
      */
     protected function registerCoreProviders()
     {
+        $this->register(AuthServiceProvider::class);
         $this->register(ConsoleServiceProvider::class);
         $this->register(EventServiceProvider::class);
         $this->register(FilesystemServiceProvider::class);
@@ -116,11 +140,72 @@ class Application extends Container
     /**
      * Capture the server request
      *
-     * @return void
+     * @return \Plugin\Support\Http\Request
      */
     protected function captureRequest()
     {
-        $this->instance('request', Request::capture());
+        $this->instance('request', $request = Request::capture());
+
+        return $request;
+    }
+
+    /**
+     * Capture the server request
+     *
+     * @return void
+     */
+    protected function runRequestThroughStack(Request $request)
+    {
+        try {
+            $response = (new Pipeline())
+                ->send($request)
+                ->through($this->middleware)
+                ->then(function ($request) {
+                    $this->instance('request', $request);
+
+                    return $request;
+                });
+        } catch (Throwable $e) {
+            $response = $this->renderException($request, $e);
+        }
+
+        return $response;
+    }
+
+    /**
+     * Add a global middleware to the app
+     *
+     * @param array $middleware
+     * @return self
+     */
+    public function middleware(array $middleware)
+    {
+        $this->middleware = array_unique(array_merge($this->middleware, $middleware));
+
+        return $this;
+    }
+
+    /**
+     * Add a global middleware to the app
+     *
+     * @param array $middleware
+     * @return self
+     */
+    public function routeMiddleware(array $middleware)
+    {
+        $this->routeMiddleware = array_merge($this->routeMiddleware, $middleware);
+
+        return $this;
+    }
+
+    /**
+     * Get the route middleware
+     *
+     * @return array
+     */
+    public function getRouteMiddleware()
+    {
+        return $this->routeMiddleware;
     }
 
     /**
@@ -130,7 +215,9 @@ class Application extends Container
      */
     public function boot()
     {
-        $this->captureRequest();
+        $request = $this->captureRequest();
+
+        $this->runRequestThroughStack($request);
 
         $this->bootProviders();
     }
@@ -153,6 +240,18 @@ class Application extends Container
     public function runningInConsole()
     {
         return class_exists('WP_CLI');
+    }
+
+    /**
+     * Render an HTTP exception
+     *
+     * @param \Plugin\Support\Http\Request $request
+     * @param \Throwable $e
+     * @return string
+     */
+    public function renderException(Request $request, Throwable $e)
+    {
+        return $this[ExceptionHandler::class]->render($request, $e);
     }
 
     /**

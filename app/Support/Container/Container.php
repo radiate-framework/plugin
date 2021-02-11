@@ -180,4 +180,26 @@ class Container implements ArrayAccess, ContainerInterface
     {
         unset($this->bindings[$key], $this->instances[$key]);
     }
+
+    /**
+     * Get an instance
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function __get(string $key)
+    {
+        return $this->get($key);
+    }
+
+    /**
+     * Set an instance
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function __set(string $key, $value)
+    {
+        $this[$key] = $value;
+    }
 }

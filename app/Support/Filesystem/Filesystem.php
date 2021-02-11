@@ -37,7 +37,7 @@ class Filesystem
      * @param  bool  $lock
      * @return string
      *
-     * @throws \Atomic\Contracts\Filesystem\FileNotFoundException
+     * @throws \Plugin\Support\Filesystem\Exceptions\FileNotFoundException
      */
     public function get(string $path, bool $lock = false): string
     {
@@ -83,7 +83,7 @@ class Filesystem
      * @param  string  $path
      * @return mixed
      *
-     * @throws \Atomic\Contracts\Filesystem\FileNotFoundException
+     * @throws \Plugin\Support\Filesystem\Exceptions\FileNotFoundException
      */
     public function getRequire(string $path)
     {
@@ -130,7 +130,7 @@ class Filesystem
     }
 
     /**
-     * Write the contents of a file, replacing it atomically if it already exists.
+     * Write the contents of a file, replacing it automatically if it already exists.
      *
      * @param  string  $path
      * @param  string  $content

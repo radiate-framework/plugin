@@ -15,6 +15,7 @@ class ConsoleServiceProvider extends ServiceProvider
         \Plugin\Support\Foundation\Console\MakeController::class,
         \Plugin\Support\Foundation\Console\MakeEvent::class,
         \Plugin\Support\Foundation\Console\MakeListener::class,
+        \Plugin\Support\Foundation\Console\MakeMiddleware::class,
         \Plugin\Support\Foundation\Console\MakeProvider::class,
         \Plugin\Support\Foundation\Console\MakeSubscriber::class,
         \Plugin\Support\Foundation\Console\VendorPublish::class,
