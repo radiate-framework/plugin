@@ -118,7 +118,7 @@ abstract class Route
      */
     public function prefix(string $path = '')
     {
-        return $this->attributes['prefix'] . ($path ? '/' . $path : $path);
+        return trim($this->attributes['prefix'] . ($path ? '/' . $path : $path), '/');
     }
 
     /**
