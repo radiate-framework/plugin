@@ -14,8 +14,10 @@ class AjaxRoute extends Route
      */
     public function dispatch(Request $request)
     {
-        $this->router->listen("wp_ajax_{$this->uri()}", $this->handle($request));
-        $this->router->listen("wp_ajax_nopriv_{$this->uri()}", $this->handle($request));
+        $this->router->listen([
+            "wp_ajax_{$this->uri()}",
+            "wp_ajax_nopriv_{$this->uri()}",
+        ], $this->handle($request));
     }
 
     /**

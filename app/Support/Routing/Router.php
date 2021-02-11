@@ -344,12 +344,12 @@ class Router
     /**
      * Listen to an event
      *
-     * @param string $event
+     * @param string|string[] $events
      * @param mixed $callback
      * @return void
      */
-    public function listen(string $event, $callback)
+    public function listen($events, $callback)
     {
-        $this->events->listen($event, $callback);
+        $this->events->listen($events, $callback);
     }
 }
