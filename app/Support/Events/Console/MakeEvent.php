@@ -1,32 +1,32 @@
 <?php
 
-namespace Plugin\Support\Foundation\Console;
+namespace Plugin\Support\Events\Console;
 
 use Plugin\Support\Console\GeneratorCommand;
 
-class MakeSubscriber extends GeneratorCommand
+class MakeEvent extends GeneratorCommand
 {
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Subscriber';
+    protected $type = 'Event';
 
     /**
      * The command signature.
      *
      * @var string
      */
-    protected $signature = 'make:subscriber {name : The name of the subscriber}
-                                            {--force : Overwrite the subscriber if it exists}';
+    protected $signature = 'make:event {name : The name of the event}
+                                       {--force : Overwrite the event if it exists}';
 
     /**
      * The command description.
      *
      * @var string
      */
-    protected $description = 'Make a subscriber';
+    protected $description = 'Make an event';
 
     /**
      * Get the stub path.
@@ -35,7 +35,7 @@ class MakeSubscriber extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/stubs/subscriber.stub';
+        return __DIR__ . '/stubs/event.stub';
     }
 
     /**
@@ -46,6 +46,6 @@ class MakeSubscriber extends GeneratorCommand
      */
     protected function getDefaultNamespace(string $rootNamespace)
     {
-        return $rootNamespace . '\\Listeners';
+        return $rootNamespace . '\\Events';
     }
 }

@@ -1,32 +1,32 @@
 <?php
 
-namespace Plugin\Support\Foundation\Console;
+namespace Plugin\Support\Events\Console;
 
 use Plugin\Support\Console\GeneratorCommand;
 
-class MakeMiddleware extends GeneratorCommand
+class MakeSubscriber extends GeneratorCommand
 {
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Middleware';
+    protected $type = 'Subscriber';
 
     /**
      * The command signature.
      *
      * @var string
      */
-    protected $signature = 'make:middleware {name : The name of the middleware}
-                                            {--force : Overwrite the middleware if it exists}';
+    protected $signature = 'make:subscriber {name : The name of the subscriber}
+                                            {--force : Overwrite the subscriber if it exists}';
 
     /**
      * The command description.
      *
      * @var string
      */
-    protected $description = 'Make a middleware';
+    protected $description = 'Make a subscriber';
 
     /**
      * Get the stub path.
@@ -35,7 +35,7 @@ class MakeMiddleware extends GeneratorCommand
      */
     protected function getStub()
     {
-        return __DIR__ . '/stubs/middleware.stub';
+        return __DIR__ . '/stubs/subscriber.stub';
     }
 
     /**
@@ -46,6 +46,6 @@ class MakeMiddleware extends GeneratorCommand
      */
     protected function getDefaultNamespace(string $rootNamespace)
     {
-        return $rootNamespace . '\\Http\\Middleware';
+        return $rootNamespace . '\\Listeners';
     }
 }
