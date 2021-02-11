@@ -34,7 +34,8 @@ class RestRoute extends Route
     {
         return function (WP_REST_Request $wpRequest) use ($request) {
             die($this->runRequestThroughStack(
-                $request->merge($wpRequest->get_url_params())
+                $request->merge($parameters = $wpRequest->get_url_params()),
+                array_values($parameters)
             ));
         };
     }
