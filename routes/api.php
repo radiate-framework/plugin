@@ -3,5 +3,8 @@
 /**
  * @var \Plugin\Support\Routing\Router $router
  */
-
-// $router->get('test/{name?}', Plugin\Http\Controllers\RestController::class);
+$router->prefix('user/{user}')->group(function ($router) {
+    $router->get('test/{name?}', function ($request) {
+        return $request;
+    });
+});

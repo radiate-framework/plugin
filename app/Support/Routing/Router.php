@@ -16,6 +16,7 @@ class Router
      *
      */
     public $app;
+
     /**
      * The events instance
      *
@@ -223,7 +224,7 @@ class Router
     }
 
     /**
-     * Get teh group middleware
+     * Get the group middleware
      *
      * @return array
      */
@@ -298,36 +299,37 @@ class Router
      * @param \Closure|string $callback
      * @return void
      */
-    public function group($callback)
+    public function group($routes)
     {
         $this->groupStack[] = $this->currentGroup;
-
         $this->currentGroup = [];
 
-        $callback = $this->resolveGroupCallback($callback);
-
-        $callback($this);
+        $this->loadRoutes($routes);
 
         array_pop($this->groupStack);
     }
 
     /**
-     * Resolve the group callback
+     * Load the provided routes.
      *
-     * @param \Closure|string $callback
-     * @return \Closure
+     * @param \Closure|string $routes
+     * @return void
      */
-    protected function resolveGroupCallback($callback)
+    protected function loadRoutes($routes)
     {
-        return $callback instanceof Closure ? $callback : function ($router) use ($callback) {
-            require $callback;
-        };
+        if ($routes instanceof Closure) {
+            $routes($this);
+        } else {
+            $router = $this;
+
+            require $routes;
+        }
     }
 
     /**
-     * Dispatch the request
+     * Dispatch the request to the routes
      *
-     * @param Plugin\Support\Http\Request $request
+     * @param \Plugin\Support\Http\Request $request
      * @return void
      */
     public function dispatch(Request $request)
@@ -339,6 +341,13 @@ class Router
         }
     }
 
+    /**
+     * Listen to an event
+     *
+     * @param string $event
+     * @param mixed $callback
+     * @return void
+     */
     public function listen(string $event, $callback)
     {
         $this->events->listen($event, $callback);

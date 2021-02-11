@@ -16,7 +16,7 @@ class RestRoute extends Route
     public function dispatch(Request $request)
     {
         $this->router->listen('rest_api_init', function () use ($request) {
-            register_rest_route($this->namespace(), $this->parseUri($this->uri), [
+            register_rest_route($this->namespace(), $this->parseUri($this->uri()), [
                 'methods'             => $this->methods(),
                 'callback'            => $this->handle($request),
                 'permission_callback' => '__return_true',
@@ -24,9 +24,19 @@ class RestRoute extends Route
         });
     }
 
-    public function namespace()
+    /**
+     * Dispatch the route
+     *
+     * @param \Plugin\Support\Http\Request $request
+     * @return void
+     */
+    public function handle(Request $request)
     {
-        return $this->attributes['namespace'] ?? 'api';
+        return function (WP_REST_Request $wpRequest) use ($request) {
+            die($this->runRequestThroughStack(
+                $request->merge($wpRequest->get_url_params())
+            ));
+        };
     }
 
     /**
@@ -37,18 +47,6 @@ class RestRoute extends Route
      */
     protected function parseUri(string $uri): string
     {
-        return preg_replace('@\/\{([\w]+?)(\?)?\}@', '\/?(?P<$1>[\w-]+)$2', $this->attributes['prefix'] . '/' . $uri);
-    }
-
-    /**
-     * Dispatch the route
-     *
-     * @return void
-     */
-    public function handle(Request $request)
-    {
-        return function (WP_REST_Request $wpRequest) use ($request) {
-            die($this->runRequestThroughStack($request->merge($wpRequest->get_url_params())));
-        };
+        return preg_replace('@\/\{([\w]+?)(\?)?\}@', '\/?(?P<$1>[\w-]+)$2', $uri);
     }
 }

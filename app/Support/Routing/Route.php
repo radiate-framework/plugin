@@ -3,8 +3,8 @@
 namespace Plugin\Support\Routing;
 
 use Plugin\Support\Foundation\Application;
-use Throwable;
 use Plugin\Support\Http\Request;
+use Throwable;
 
 abstract class Route
 {
@@ -44,6 +44,13 @@ abstract class Route
     protected $action;
 
     /**
+     * The route attributes
+     *
+     * @var array
+     */
+    protected $attributes;
+
+    /**
      * Create the route instance
      *
      * @param array|string $methods
@@ -54,22 +61,31 @@ abstract class Route
     {
         $this->methods = (array) $methods;
         $this->uri = $uri;
-        $this->action = $this->resolveAction($action);
+        $this->action = $action;
     }
 
     /**
-     * Resolve the action to a callable
+     * Get the URI
      *
-     * @param mixed $action
+     * @return string
+     */
+    public function uri()
+    {
+        return $this->prefix($this->uri);
+    }
+
+    /**
+     * Get the route action
+     *
      * @return mixed
      */
-    public function resolveAction($action)
+    public function action()
     {
-        if (is_callable($action)) {
-            return $action;
+        if (is_callable($this->action)) {
+            return $this->action;
         }
-        if (is_string($action) && class_exists($action)) {
-            return [new $action, '__invoke'];
+        if (is_string($this->action) && class_exists($this->action)) {
+            return [new $this->action, '__invoke'];
         }
     }
 
@@ -83,6 +99,44 @@ abstract class Route
         return $this->methods;
     }
 
+    /**
+     * Get the route middleware
+     *
+     * @return array
+     */
+    public function middleware()
+    {
+        return $this->attributes['middleware'] ?? [];
+    }
+
+    /**
+     * Get the route prefix
+     *
+     * @param string $path
+     * @param string $sep
+     * @return string
+     */
+    public function prefix(string $path = '')
+    {
+        return $this->attributes['prefix'] . ($path ? '/' . $path : $path);
+    }
+
+    /**
+     * Get the route namespace
+     *
+     * @return string
+     */
+    public function namespace()
+    {
+        return $this->attributes['namespace'] ?? 'api';
+    }
+
+    /**
+     * Set the group attributes
+     *
+     * @param array $attributes
+     * @return void
+     */
     public function setGroupAttributes(array $attributes)
     {
         $this->attributes = $attributes;
@@ -124,9 +178,9 @@ abstract class Route
         try {
             $response = (new Pipeline())
                 ->send($request)
-                ->through($this->attributes['middleware'] ?? [])
+                ->through($this->middleware())
                 ->then(function ($request) {
-                    return call_user_func($this->action, $request);
+                    return call_user_func($this->action(), $request);
                 });
         } catch (Throwable $e) {
             $response = $this->app->renderException($request, $e);
@@ -146,6 +200,7 @@ abstract class Route
     /**
      * Handle the route
      *
+     * @param \Plugin\Support\Http\Request $request
      * @return void
      */
     abstract public function handle(Request $request);
