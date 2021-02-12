@@ -56,8 +56,12 @@ abstract class ServiceProvider
      *
      * @return array
      */
-    public static function pathsToPublish(string $provider)
+    public static function pathsToPublish(?string $provider = null)
     {
-        return static::$publishes[$provider];
+        if (static::$publishes[$provider]) {
+            return [static::$publishes[$provider]];
+        }
+
+        return static::$publishes;
     }
 }
