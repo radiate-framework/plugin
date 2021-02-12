@@ -54,6 +54,7 @@ abstract class ServiceProvider
     /**
      * Get the paths to publish
      *
+     * @param string|null $provider
      * @return array
      */
     public static function pathsToPublish(?string $provider = null)
