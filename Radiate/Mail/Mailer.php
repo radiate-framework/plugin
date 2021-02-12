@@ -108,7 +108,7 @@ class Mailer
      * Begin the process of mailing a mailable class instance.
      *
      * @param  mixed  $users
-     * @return \Atomic\Mail\PendingMail
+     * @return \Radiate\Mail\PendingMail
      */
     public function bcc($users): PendingMail
     {

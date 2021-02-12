@@ -1,8 +1,8 @@
 <?php
 
-namespace Radiate\Foundation\Events;
+namespace Radiate\Events;
 
-use function Plugin\event;
+use Radiate\Support\Facades\Event;
 
 trait Dispatchable
 {
@@ -14,6 +14,6 @@ trait Dispatchable
      */
     public static function dispatch(...$args): void
     {
-        event(new static(...$args));
+        Event::dispatch(new static(...$args));
     }
 }

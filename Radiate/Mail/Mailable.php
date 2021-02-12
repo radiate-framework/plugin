@@ -2,6 +2,8 @@
 
 namespace Radiate\Mail;
 
+use Radiate\Support\Facades\App;
+use Radiate\Support\Facades\View;
 use ReflectionClass;
 use ReflectionProperty;
 use WP_User;
@@ -179,7 +181,7 @@ abstract class Mailable
      */
     public function text(string $path, array $data = []): self
     {
-        $this->text = \Plugin\view($path, $this->buildViewData($data));
+        $this->text = View::make($path, $this->buildViewData($data));
 
         return $this;
     }
@@ -193,7 +195,7 @@ abstract class Mailable
      */
     public function view(string $path, array $data = []): self
     {
-        $this->html = \Plugin\view($path, $this->buildViewData($data));
+        $this->html = View::view($path, $this->buildViewData($data));
 
         return $this;
     }
@@ -209,7 +211,7 @@ abstract class Mailable
     {
         $this->text($path, $data);
 
-        $this->html =  \Plugin\app('markdown')->text($this->text);
+        $this->html = App::get('markdown')->text($this->text);
 
         return $this;
     }
@@ -393,7 +395,7 @@ abstract class Mailable
     /**
      * Build the email
      *
-     * @return \Atomic\Mail\Mailable
+     * @return \Radiate\Mail\Mailable
      */
     public function build(): self
     {

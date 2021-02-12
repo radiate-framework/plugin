@@ -2,7 +2,7 @@
 
 namespace {{ namespace }};
 
-use Radiate\Foundation\Events\Dispatchable;
+use Radiate\Events\Dispatchable;
 
 class {{ class }}
 {

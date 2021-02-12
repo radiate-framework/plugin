@@ -2,6 +2,7 @@
 
 namespace Radiate\Foundation\Providers;
 
+use Radiate\Support\Facades\Event;
 use Radiate\Support\ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -29,12 +30,12 @@ class EventServiceProvider extends ServiceProvider
     {
         foreach ($this->listen as $event => $listeners) {
             foreach (array_unique($listeners) as $listener) {
-                $this->app['events']->listen($event, $listener);
+                Event::listen($event, $listener);
             }
         }
 
         foreach ($this->subscribe as $subscriber) {
-            $this->app['events']->subscribe($subscriber);
+            Event::subscribe($subscriber);
         }
     }
 }
