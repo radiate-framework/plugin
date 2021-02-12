@@ -26,6 +26,12 @@ $app->middleware([
 // when defining ajax and rest routes for the applciation.
 $app->routeMiddleware([
     'auth' => Plugin\Support\Auth\Middleware\Authenticate::class,
+    'ajax' => [
+        //
+    ],
+    'api' => [
+        //
+    ],
 ]);
 
 // register the service providers. The providers allow for a pluggable interface

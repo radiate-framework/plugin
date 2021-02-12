@@ -3,6 +3,7 @@
 namespace Plugin\Providers;
 
 use Plugin\Support\Foundation\Providers\RouteServiceProvider as ServiceProvider;
+use Plugin\Support\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -25,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function mapAjaxRoutes()
     {
-        $this->router()
+        Route::middleware('ajax')
             ->group($this->app->basePath('routes/ajax.php'));
     }
 
@@ -36,8 +37,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function mapApiRoutes()
     {
-        $this->router()
-            ->namespace('api')
+        Route::namespace('api')
+            ->middleware('api')
             ->group($this->app->basePath('routes/api.php'));
     }
 }
