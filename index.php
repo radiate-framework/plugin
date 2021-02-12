@@ -32,6 +32,7 @@ $app->routeMiddleware([
 // so vendor packages can be loaded within the framework.
 $app->register(Plugin\Providers\EventServiceProvider::class);
 $app->register(Plugin\Providers\RouteServiceProvider::class);
+$app->register(Plugin\Support\Mail\MailServiceProvider::class);
 
 // boot the app. This will capture the request, run it through the global
 // middleware, and then boot each provider.
