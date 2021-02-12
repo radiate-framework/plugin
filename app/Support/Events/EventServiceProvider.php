@@ -17,4 +17,18 @@ class EventServiceProvider extends ServiceProvider
             return new Dispatcher();
         });
     }
+
+    /**
+     * Boot the provider
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->commands([
+            \Plugin\Support\Events\Console\MakeEvent::class,
+            \Plugin\Support\Events\Console\MakeListener::class,
+            \Plugin\Support\Events\Console\MakeSubscriber::class,
+        ]);
+    }
 }

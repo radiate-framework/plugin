@@ -22,6 +22,7 @@ class VendorPublish extends Command
      * @var string
      */
     protected $signature = 'vendor:publish {--provider : The service provider that has assets you want to publish}
+                                           {--tag : The tag to publish}
                                            {--force : Overwrite any existing files}';
 
     /**
@@ -51,24 +52,21 @@ class VendorPublish extends Command
      */
     public function handle()
     {
-        $providers = ServiceProvider::pathsToPublish($this->option('provider'));
+        $paths = ServiceProvider::pathsToPublish($this->option('provider'), $this->option('tag'));
 
-        foreach ($providers as $provider) {
-            foreach ($provider as $from => $to) {
-                if ($this->files->copyDirectory($from, $to)) {
-                    $this->status($from, $to, 'Directory');
-                }
+        foreach ($paths as $from => $to) {
+            if ($this->files->copyDirectory($from, $to)) {
+                $this->status($from, $to, 'Directory');
+            }
 
-                if (!$this->files->exists($to) || $this->option('force')) {
-                    $this->files->ensureDirectoryExists(dirname($to));
+            if (!$this->files->exists($to) || $this->option('force')) {
+                $this->files->ensureDirectoryExists(dirname($to));
 
-                    $this->files->copy($from, $to);
+                $this->files->copy($from, $to);
 
-                    $this->status($from, $to, 'File');
-                }
+                $this->status($from, $to, 'File');
             }
         }
-
 
         $this->success('Publishing complete.');
     }
