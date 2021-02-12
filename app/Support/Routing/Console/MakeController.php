@@ -19,7 +19,7 @@ class MakeController extends GeneratorCommand
      * @var string
      */
     protected $signature = 'make:controller {name : The name of the controller}
-                                            {--resource : Crate a resourece controller}
+                                            {--resource : Create a resource controller}
                                             {--force : Overwrite the controller if it exists}';
 
     /**
