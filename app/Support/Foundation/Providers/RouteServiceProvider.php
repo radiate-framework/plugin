@@ -25,16 +25,6 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->map();
 
-        $this->router()->dispatch($this->app['request']);
-    }
-
-    /**
-     * Get the router instance
-     *
-     * @return \Plugin\Support\Routing\Router
-     */
-    public function router()
-    {
-        return $this->app['router'];
+        $this->app['router']->dispatch($this->app['request']);
     }
 }
