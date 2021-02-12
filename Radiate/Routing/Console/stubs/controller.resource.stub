@@ -2,15 +2,15 @@
 
 namespace {{ namespace }};
 
-use {{ rootNamespace }}Support\Http\Request;
-use {{ rootNamespace }}Support\Routing\Controller;
+use Radiate\Http\Request;
+use Radiate\Routing\Controller;
 
 class {{ class }} extends Controller
 {
     /**
      * Show multiple resources
      *
-     * @param \{{ rootNamespace }}Support\Http\Request $request
+     * @param \Radiate\Http\Request $request
      * @return mixed
      */
     public function index(Request $request)
@@ -21,7 +21,7 @@ class {{ class }} extends Controller
     /**
      * Show a resource
      *
-     * @param \{{ rootNamespace }}Support\Http\Request $request
+     * @param \Radiate\Http\Request $request
      * @param int $id
      * @return mixed
      */
@@ -33,7 +33,7 @@ class {{ class }} extends Controller
     /**
      * Store a new resource
      *
-     * @param \{{ rootNamespace }}Support\Http\Request $request
+     * @param \Radiate\Http\Request $request
      * @return mixed
      */
     public function store(Request $request)
@@ -44,7 +44,7 @@ class {{ class }} extends Controller
     /**
      * Update a resource
      *
-     * @param \{{ rootNamespace }}Support\Http\Request $request
+     * @param \Radiate\Http\Request $request
      * @param int $id
      * @return mixed
      */
@@ -56,7 +56,7 @@ class {{ class }} extends Controller
     /**
      * Delete a resource
      *
-     * @param \{{ rootNamespace }}Support\Http\Request $request
+     * @param \Radiate\Http\Request $request
      * @param int $id
      * @return mixed
      */
