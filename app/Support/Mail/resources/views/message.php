@@ -1,3 +1,6 @@
-# hello
+# Introduction
 
-*bold* or maybe __italic__
+The body of your message.
+
+Thanks,<br>
+<?php bloginfo('name'); ?>
