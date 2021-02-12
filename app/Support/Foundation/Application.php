@@ -10,6 +10,7 @@ use Plugin\Support\Foundation\Providers\ConsoleServiceProvider;
 use Plugin\Support\Filesystem\FilesystemServiceProvider;
 use Plugin\Support\Http\Request;
 use Plugin\Support\Routing\Pipeline;
+use Plugin\Support\Routing\RoutingServiceProvider;
 use Plugin\Support\View\ViewServiceProvider;
 use RuntimeException;
 use Throwable;
@@ -95,6 +96,7 @@ class Application extends Container
         $this->register(AuthServiceProvider::class);
         $this->register(EventServiceProvider::class);
         $this->register(FilesystemServiceProvider::class);
+        $this->register(RoutingServiceProvider::class);
         $this->register(ViewServiceProvider::class);
 
         if ($this->runningInConsole()) {
