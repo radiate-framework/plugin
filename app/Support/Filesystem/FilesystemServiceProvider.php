@@ -2,7 +2,7 @@
 
 namespace Plugin\Support\Filesystem;
 
-use Plugin\Support\ServiceProvider;
+use Plugin\Support\Support\ServiceProvider;
 
 class FilesystemServiceProvider extends ServiceProvider
 {

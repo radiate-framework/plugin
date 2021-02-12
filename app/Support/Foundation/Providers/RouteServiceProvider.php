@@ -2,7 +2,7 @@
 
 namespace Plugin\Support\Foundation\Providers;
 
-use Plugin\Support\ServiceProvider;
+use Plugin\Support\Support\ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {

@@ -2,7 +2,7 @@
 
 namespace Plugin\Support\Auth;
 
-use Plugin\Support\ServiceProvider;
+use Plugin\Support\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {

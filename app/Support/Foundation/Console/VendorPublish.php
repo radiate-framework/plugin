@@ -5,7 +5,7 @@ namespace Plugin\Support\Foundation\Console;
 use Plugin\Support\Console\Command;
 use Plugin\Support\Filesystem\Filesystem;
 use Plugin\Support\Foundation\Application;
-use Plugin\Support\ServiceProvider;
+use Plugin\Support\Support\ServiceProvider;
 
 class VendorPublish extends Command
 {

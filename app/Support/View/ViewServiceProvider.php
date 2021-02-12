@@ -2,7 +2,7 @@
 
 namespace Plugin\Support\View;
 
-use Plugin\Support\ServiceProvider;
+use Plugin\Support\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
 {

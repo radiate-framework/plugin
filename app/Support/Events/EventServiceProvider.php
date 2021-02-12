@@ -2,7 +2,7 @@
 
 namespace Plugin\Support\Events;
 
-use Plugin\Support\ServiceProvider;
+use Plugin\Support\Support\ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {

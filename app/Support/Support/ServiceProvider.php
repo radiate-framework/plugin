@@ -1,6 +1,6 @@
 <?php
 
-namespace Plugin\Support;
+namespace Plugin\Support\Support;
 
 use Plugin\Support\Foundation\Application;
 

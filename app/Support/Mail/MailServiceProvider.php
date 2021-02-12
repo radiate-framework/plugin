@@ -3,7 +3,7 @@
 namespace Plugin\Support\Mail;
 
 use Parsedown;
-use Plugin\Support\ServiceProvider;
+use Plugin\Support\Support\ServiceProvider;
 
 class MailServiceProvider extends ServiceProvider
 {
