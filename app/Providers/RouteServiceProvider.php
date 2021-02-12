@@ -26,6 +26,7 @@ class RouteServiceProvider extends ServiceProvider
     public function mapAjaxRoutes()
     {
         $this->router()
+            ->middleware('ajax')
             ->group($this->app->basePath('routes/ajax.php'));
     }
 
@@ -38,6 +39,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->router()
             ->namespace('api')
+            ->middleware('api')
             ->group($this->app->basePath('routes/api.php'));
     }
 }

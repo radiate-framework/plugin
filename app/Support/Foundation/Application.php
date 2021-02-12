@@ -11,6 +11,7 @@ use Plugin\Support\Filesystem\FilesystemServiceProvider;
 use Plugin\Support\Http\Request;
 use Plugin\Support\Routing\Pipeline;
 use Plugin\Support\Routing\RoutingServiceProvider;
+use Plugin\Support\Support\Facades\Facade;
 use Plugin\Support\View\ViewServiceProvider;
 use RuntimeException;
 use Throwable;
@@ -65,6 +66,7 @@ class Application extends Container
 
         $this->registerBaseBindings();
         $this->registerCoreProviders();
+        $this->setFacadeRoot();
     }
 
     /**
@@ -84,6 +86,16 @@ class Application extends Container
         $this->singleton(ExceptionHandler::class, function ($app) {
             return new ExceptionHandler($app);
         });
+    }
+
+    /**
+     * Set the facade root
+     *
+     * @return void
+     */
+    protected function setFacadeRoot()
+    {
+        Facade::setFacadeApplication($this);
     }
 
     /**
