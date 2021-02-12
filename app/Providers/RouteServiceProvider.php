@@ -2,8 +2,8 @@
 
 namespace Plugin\Providers;
 
-use Plugin\Support\Foundation\Providers\RouteServiceProvider as ServiceProvider;
-use Plugin\Support\Support\Facades\Route;
+use Radiate\Foundation\Providers\RouteServiceProvider as ServiceProvider;
+use Radiate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {

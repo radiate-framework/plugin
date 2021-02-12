@@ -2,7 +2,7 @@
 
 namespace Plugin\Providers;
 
-use Plugin\Support\Foundation\Providers\EventServiceProvider as ServiceProvider;
+use Radiate\Foundation\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {

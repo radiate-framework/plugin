@@ -1,6 +1,6 @@
 <?php
 
-use Plugin\Support\Support\Facades\Route;
+use Radiate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
