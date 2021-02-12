@@ -19,6 +19,7 @@ class MakeController extends GeneratorCommand
      * @var string
      */
     protected $signature = 'make:controller {name : The name of the controller}
+                                            {--resource : Create a resource controller}
                                             {--force : Overwrite the controller if it exists}';
 
     /**
@@ -35,6 +36,10 @@ class MakeController extends GeneratorCommand
      */
     protected function getStub()
     {
+        if ($this->option('resource')) {
+            return __DIR__ . '/stubs/controller.resource.stub';
+        }
+
         return __DIR__ . '/stubs/controller.stub';
     }
 

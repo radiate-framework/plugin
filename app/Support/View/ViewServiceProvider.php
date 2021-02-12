@@ -17,4 +17,16 @@ class ViewServiceProvider extends ServiceProvider
             return new View($app->basePath('views'));
         });
     }
+
+    /**
+     * Boot the provider
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/vendor/views' => $this->app->basePath('views'),
+        ]);
+    }
 }

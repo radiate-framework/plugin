@@ -61,7 +61,7 @@ class Router
      * Create an ajax route
      *
      * @param string $uri
-     * @param \Closure $action
+     * @param mixed $action
      * @return void
      */
     public function ajax(string $uri, $action)
@@ -73,7 +73,7 @@ class Router
      * Create an GET route
      *
      * @param string $uri
-     * @param \Closure $action
+     * @param mixed $action
      * @return void
      */
     public function get(string $uri, $action)
@@ -85,7 +85,7 @@ class Router
      * Create a POST route
      *
      * @param string $uri
-     * @param \Closure $action
+     * @param mixed $action
      * @return void
      */
     public function post(string $uri, $action)
@@ -97,7 +97,7 @@ class Router
      * Create a PUT route
      *
      * @param string $uri
-     * @param \Closure $action
+     * @param mixed $action
      * @return void
      */
     public function put(string $uri, $action)
@@ -109,7 +109,7 @@ class Router
      * Create a PATCH route
      *
      * @param string $uri
-     * @param \Closure $action
+     * @param mixed $action
      * @return void
      */
     public function patch(string $uri, $action)
@@ -121,7 +121,7 @@ class Router
      * Create a DELETE route
      *
      * @param string $uri
-     * @param \Closure $action
+     * @param mixed $action
      * @return void
      */
     public function delete(string $uri, $action)
@@ -133,7 +133,7 @@ class Router
      * Create an route with any method
      *
      * @param string $uri
-     * @param \Closure $action
+     * @param mixed $action
      * @return void
      */
     public function any(string $uri, $action)
@@ -146,7 +146,7 @@ class Router
      *
      * @param array $methods
      * @param string $uri
-     * @param \Closure $action
+     * @param mixed $action
      * @return void
      */
     public function matches(array $methods, string $uri, $action)
@@ -156,6 +156,35 @@ class Router
         }
 
         return $this->addRoute(new RestRoute($methods, $uri, $action));
+    }
+
+    /**
+     * Create resource routes
+     *
+     * @param string $uri
+     * @param string $action
+     * @param array $methods
+     * @return void
+     */
+    public function resource(string $uri, string $action, array $methods = ['index', 'show', 'store', 'update', 'destroy'])
+    {
+        $this->prefix($uri)->group(function () use ($action, $methods) {
+            if (in_array('index', $methods)) {
+                $this->get('/', [$action, 'index']);
+            }
+            if (in_array('show', $methods)) {
+                $this->get('{id}', [$action, 'show']);
+            }
+            if (in_array('store', $methods)) {
+                $this->post('/', [$action, 'store']);
+            }
+            if (in_array('update', $methods)) {
+                $this->matches(['PUT', 'PATCH'], '{id}', [$action, 'update']);
+            }
+            if (in_array('destroy', $methods)) {
+                $this->delete('{id}', [$action, 'destroy']);
+            }
+        });
     }
 
     /**

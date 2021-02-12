@@ -171,16 +171,18 @@ abstract class Route
     /**
      * Handle the controller action
      *
+     * @param \Plugin\Support\Http\Request $request
+     * @param array $parameters
      * @return mixed
      */
-    protected function runRequestThroughStack(Request $request)
+    protected function runRequestThroughStack(Request $request, array $parameters = [])
     {
         try {
             $response = (new Pipeline())
                 ->send($request)
                 ->through($this->middleware())
-                ->then(function ($request) {
-                    return call_user_func($this->action(), $request);
+                ->then(function ($request) use ($parameters) {
+                    return call_user_func($this->action(), $request, ...$parameters);
                 });
         } catch (Throwable $e) {
             $response = $this->app->renderException($request, $e);

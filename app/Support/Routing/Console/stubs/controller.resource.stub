@@ -1,0 +1,67 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ rootNamespace }}Support\Http\Request;
+use {{ rootNamespace }}Support\Routing\Controller;
+
+class {{ class }} extends Controller
+{
+    /**
+     * Show multiple resources
+     *
+     * @param \{{ rootNamespace }}Support\Http\Request $request
+     * @return mixed
+     */
+    public function index(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Show a resource
+     *
+     * @param \{{ rootNamespace }}Support\Http\Request $request
+     * @param int $id
+     * @return mixed
+     */
+    public function show(Request $request, int $id)
+    {
+        //
+    }
+
+    /**
+     * Store a new resource
+     *
+     * @param \{{ rootNamespace }}Support\Http\Request $request
+     * @return mixed
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Update a resource
+     *
+     * @param \{{ rootNamespace }}Support\Http\Request $request
+     * @param int $id
+     * @return mixed
+     */
+    public function update(Request $request, int $id)
+    {
+        //
+    }
+
+    /**
+     * Delete a resource
+     *
+     * @param \{{ rootNamespace }}Support\Http\Request $request
+     * @param int $id
+     * @return mixed
+     */
+    public function destroy(Request $request, int $id)
+    {
+        //
+    }
+}
