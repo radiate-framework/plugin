@@ -26,7 +26,7 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/resources/views' => $this->app->basePath('views/vendor'),
+            __DIR__ . '/resources/views' => $this->app->basePath('views'),
         ], 'views');
     }
 }

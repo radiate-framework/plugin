@@ -139,16 +139,16 @@ class Mailer
         // If a global from address has been specified we will set it on every message
         // instance so the developer does not have to repeat themselves every time
         // they create a new message. We'll just go ahead and push this address.
-        if (!empty($this->from['address'])) {
-            $mailable->from($this->from['address'], $this->from['name']);
-        }
+        //if (!empty($this->from['address'])) {
+        //    $mailable->from($this->from['address'], $this->from['name']);
+        //}
 
         // When a global reply address was specified we will set this on every message
         // instance so the developer does not have to repeat themselves every time
         // they create a new message. We will just go ahead and push this address.
-        if (!empty($this->replyTo['address'])) {
-            $mailable->replyTo($this->replyTo['address'], $this->replyTo['name']);
-        }
+        //if (!empty($this->replyTo['address'])) {
+        //    $mailable->replyTo($this->replyTo['address'], $this->replyTo['name']);
+        //}
 
 
         $this->events->listen('phpmailer_init', function (PHPMailer $phpmailer) use ($mailable) {
@@ -160,17 +160,22 @@ class Mailer
         // If a global "to" address has been set, we will set that address on the mail
         // message. This is primarily useful during local development in which each
         // message should be delivered into a single mail address for inspection.
-        if (isset($this->to['address'])) {
-            $this->setGlobalToAndRemoveCcAndBcc($mailable);
-        }
+        //if (isset($this->to['address'])) {
+        //    $this->setGlobalToAndRemoveCcAndBcc($mailable);
+        //}
 
-        return wp_mail(
-            $mailable->buildTo(),
-            $mailable->buildSubject(),
-            $mailable->buildHtml(),
-            $mailable->buildHeaders(),
-            $mailable->buildAttachments()
-        );
+        $this->events->listen('wp_loaded', function () use ($mailable) {
+
+            return wp_mail(
+                $mailable->buildTo(),
+                $mailable->buildSubject(),
+                $mailable->buildHtml(),
+                $mailable->buildHeaders(),
+                $mailable->buildAttachments()
+            );
+        });
+
+        return true;
     }
 
     /**

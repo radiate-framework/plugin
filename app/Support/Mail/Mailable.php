@@ -179,7 +179,7 @@ abstract class Mailable
      */
     public function text(string $path, array $data = []): self
     {
-        $this->text = view($path, $this->buildViewData($data));
+        $this->text = \Plugin\view($path, $this->buildViewData($data));
 
         return $this;
     }
@@ -193,7 +193,7 @@ abstract class Mailable
      */
     public function view(string $path, array $data = []): self
     {
-        $this->html = view($path, $this->buildViewData($data));
+        $this->html = \Plugin\view($path, $this->buildViewData($data));
 
         return $this;
     }
@@ -209,7 +209,7 @@ abstract class Mailable
     {
         $this->text($path, $data);
 
-        $this->html = app('markdown')->text($this->text);
+        $this->html =  \Plugin\app('markdown')->text($this->text);
 
         return $this;
     }

@@ -10,6 +10,8 @@
  * Text Domain: brw
  */
 
+use Plugin\Mail\TestMail;
+
 require __DIR__ . '/vendor/autoload.php';
 
 $app = new Plugin\Support\Foundation\Application(__DIR__);
@@ -37,3 +39,5 @@ $app->register(Plugin\Support\Mail\MailServiceProvider::class);
 // boot the app. This will capture the request, run it through the global
 // middleware, and then boot each provider.
 $app->boot();
+
+$app['mailer']->to('benrutland@hotmail.com')->send(new TestMail);
