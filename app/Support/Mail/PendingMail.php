@@ -85,9 +85,9 @@ class PendingMail
      * Send a new mailable message instance.
      *
      * @param \Plugin\Support\Mail\Mailable $mailable
-     * @return bool
+     * @return void
      */
-    public function send(Mailable $mailable): bool
+    public function send(Mailable $mailable)
     {
         return $this->mailer->send($this->fill($mailable));
     }
