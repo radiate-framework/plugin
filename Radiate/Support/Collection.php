@@ -634,7 +634,7 @@ class Collection
     public function toArray(): array
     {
         return $this->map(function ($value) {
-            return $value instanceof CollectionInterface
+            return $value instanceof Collection
                 ? $value->toArray()
                 : $value;
         })->all();

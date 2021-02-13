@@ -195,7 +195,7 @@ abstract class Mailable
      */
     public function view(string $path, array $data = []): self
     {
-        $this->html = View::view($path, $this->buildViewData($data));
+        $this->html = View::make($path, $this->buildViewData($data));
 
         return $this;
     }

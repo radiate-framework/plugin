@@ -490,7 +490,7 @@ class Stringable
      * Get the plural form of an English word.
      *
      * @param  int  $count
-     * @return string
+     * @return static
      */
     public function plural(int $count = 2)
     {
@@ -501,7 +501,7 @@ class Stringable
      * Pluralize the last word of an English, studly caps case string.
      *
      * @param  int  $count
-     * @return string
+     * @return static
      */
     public function pluralStudly(int $count = 2)
     {
@@ -846,7 +846,7 @@ class Stringable
     /**
      * Make a string's first character uppercase.
      *
-     * @return string
+     * @return static
      */
     public function ucfirst()
     {
@@ -891,7 +891,7 @@ class Stringable
     /**
      * Dump the string.
      *
-     * @return $this
+     * @return static
      */
     public function dump()
     {
