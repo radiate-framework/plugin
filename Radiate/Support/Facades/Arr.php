@@ -57,18 +57,18 @@ use Radiate\Support\Collection;
 class Arr
 {
     /**
-     * Make a new instance of stringable
+     * Make a new instance of Collection
      *
      * @param array $array
      * @return \Radiate\Support\Collection
      */
-    public static function collect(array $array)
+    public static function collect(array $array = [])
     {
         return new Collection($array);
     }
 
     /**
-     * Dynamically call the Stringable class
+     * Dynamically call the Collection class
      *
      * @param string $method
      * @param array $parameters
