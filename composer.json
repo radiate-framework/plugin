@@ -22,9 +22,14 @@
   },
   "require": {
     "php": "^7.3",
-    "psr/container": "^1.0",
-    "erusev/parsedown": "^1.7"
+    "brw/radiate-framework": "@dev"
   },
+  "repositories": [
+    {
+      "type": "path",
+      "url": "../../vendor/brw/radiate-framework"
+    }
+  ],
   "scripts": {
     "post-create-project-cmd": [
       "npm install"
