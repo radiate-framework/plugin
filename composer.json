@@ -24,7 +24,8 @@
     "php": "^7.3",
     "psr/container": "^1.0",
     "erusev/parsedown": "^1.7",
-    "str/str": "^1.1"
+    "str/str": "^1.1",
+    "illuminate/collections": "^8.27"
   },
   "scripts": {
     "post-create-project-cmd": [

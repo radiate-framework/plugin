@@ -20,21 +20,21 @@ class Stringable
      *
      * @var array
      */
-    protected static $snakeCache = [];
+    public static $snakeCache = [];
 
     /**
      * The cache of camel-cased words.
      *
      * @var array
      */
-    protected static $camelCache = [];
+    public static $camelCache = [];
 
     /**
      * The cache of studly-cased words.
      *
      * @var array
      */
-    protected static $studlyCache = [];
+    public static $studlyCache = [];
 
     /**
      * Create the string instance

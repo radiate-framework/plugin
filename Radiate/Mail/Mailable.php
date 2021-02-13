@@ -2,7 +2,7 @@
 
 namespace Radiate\Mail;
 
-use Radiate\Support\Facades\App;
+use Radiate\Support\Facades\Str;
 use Radiate\Support\Facades\View;
 use ReflectionClass;
 use ReflectionProperty;
@@ -211,7 +211,7 @@ abstract class Mailable
     {
         $this->text($path, $data);
 
-        $this->html = App::get('markdown')->text($this->text);
+        $this->html = Str::markdown($this->text);
 
         return $this;
     }

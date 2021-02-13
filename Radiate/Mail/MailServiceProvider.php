@@ -2,7 +2,6 @@
 
 namespace Radiate\Mail;
 
-use Parsedown;
 use Radiate\Support\ServiceProvider;
 
 class MailServiceProvider extends ServiceProvider
@@ -16,10 +15,6 @@ class MailServiceProvider extends ServiceProvider
     {
         $this->app->singleton('mailer', function ($app) {
             return new Mailer($app['events']);
-        });
-
-        $this->app->singleton('markdown', function () {
-            return new Parsedown();
         });
     }
 
