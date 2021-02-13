@@ -1,9 +1,9 @@
 {
-    "name": "wp-base-plugin",
-    "version": "1.1.2",
-    "description": "A WordPress plugin boilerplate",
-    "main": "index.js",
-    "scripts": {},
-    "author": "Ben Rutland",
-    "license": "MIT"
+  "name": "radiate-plugin",
+  "version": "1.1.2",
+  "description": "A WordPress plugin boilerplate",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Ben Rutland",
+  "license": "MIT"
 }
