@@ -13,8 +13,7 @@
   "prefer-stable": true,
   "autoload": {
     "psr-4": {
-      "Plugin\\": "app/",
-      "Radiate\\": "Radiate/"
+      "Plugin\\": "app/"
     },
     "files": [
       "functions.php"
@@ -22,14 +21,8 @@
   },
   "require": {
     "php": "^7.3",
-    "brw/radiate-framework": "@dev"
+    "brw/radiate-framework": "^1.0"
   },
-  "repositories": [
-    {
-      "type": "path",
-      "url": "../../vendor/brw/radiate-framework"
-    }
-  ],
   "scripts": {
     "post-create-project-cmd": [
       "npm install"
