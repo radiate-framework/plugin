@@ -1,6 +1,6 @@
 <?php
 
-namespace Radiate\Routing;
+namespace Radiate\Support;
 
 use Closure;
 

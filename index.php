@@ -94,3 +94,12 @@ $app->register(Radiate\Mail\MailServiceProvider::class);
  */
 
 $app->boot();
+
+
+use Radiate\Support\Facades\Str;
+
+var_dump(Str::of('test in words in snake in format')->lower()->replaceFirst('in', 'out')->title());
+var_dump(Str::of('test in words in snake in format octopus')->studly->pluralStudly());
+var_dump(Str::camel('test in words in snake in format'));
+
+die();

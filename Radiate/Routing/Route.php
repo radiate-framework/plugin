@@ -4,6 +4,7 @@ namespace Radiate\Routing;
 
 use Radiate\Foundation\Application;
 use Radiate\Http\Request;
+use Radiate\Support\Pipeline;
 use Throwable;
 
 abstract class Route

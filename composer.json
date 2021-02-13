@@ -23,7 +23,8 @@
   "require": {
     "php": "^7.3",
     "psr/container": "^1.0",
-    "erusev/parsedown": "^1.7"
+    "erusev/parsedown": "^1.7",
+    "str/str": "^1.1"
   },
   "scripts": {
     "post-create-project-cmd": [
