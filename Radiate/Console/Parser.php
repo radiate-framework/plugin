@@ -3,6 +3,7 @@
 namespace Radiate\Console;
 
 use Exception;
+use Radiate\Support\Facades\Str;
 
 class Parser
 {
@@ -76,7 +77,7 @@ class Parser
         [$token, $description] = static::extractDescription($token);
 
         switch (true) {
-            case static::endsWith($token, '?'):
+            case Str::endsWith($token, '?'):
                 return [
                     'type'        => 'positional',
                     'name'        => trim($token, '?'),
@@ -110,7 +111,7 @@ class Parser
         [$token, $description] = static::extractDescription($token);
 
         switch (true) {
-            case static::endsWith($token, '='):
+            case Str::endsWith($token, '='):
                 return [
                     'type'        => 'assoc',
                     'name'        => trim($token, '='),
@@ -144,23 +145,5 @@ class Parser
         $parts = preg_split('/\s+:\s+/', trim($token), 2);
 
         return count($parts) === 2 ? $parts : [$token, ''];
-    }
-
-    /**
-     * Determine if a string ends with a substring
-     *
-     * @param string $haystack
-     * @param string $needle
-     * @return void
-     */
-    protected static function endsWith(string $haystack, string $needle)
-    {
-        $length = strlen($needle);
-        if (
-            !$length
-        ) {
-            return true;
-        }
-        return substr($haystack, -$length) === $needle;
     }
 }

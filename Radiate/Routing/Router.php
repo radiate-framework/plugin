@@ -62,7 +62,7 @@ class Router
      *
      * @param string $uri
      * @param mixed $action
-     * @return void
+     * @return \Radiate\Routing\Route
      */
     public function ajax(string $uri, $action)
     {
@@ -70,11 +70,11 @@ class Router
     }
 
     /**
-     * Create an GET route
+     * Create a GET route
      *
      * @param string $uri
      * @param mixed $action
-     * @return void
+     * @return \Radiate\Routing\Route
      */
     public function get(string $uri, $action)
     {
@@ -86,7 +86,7 @@ class Router
      *
      * @param string $uri
      * @param mixed $action
-     * @return void
+     * @return \Radiate\Routing\Route
      */
     public function post(string $uri, $action)
     {
@@ -98,7 +98,7 @@ class Router
      *
      * @param string $uri
      * @param mixed $action
-     * @return void
+     * @return \Radiate\Routing\Route
      */
     public function put(string $uri, $action)
     {
@@ -110,7 +110,7 @@ class Router
      *
      * @param string $uri
      * @param mixed $action
-     * @return void
+     * @return \Radiate\Routing\Route
      */
     public function patch(string $uri, $action)
     {
@@ -122,7 +122,7 @@ class Router
      *
      * @param string $uri
      * @param mixed $action
-     * @return void
+     * @return \Radiate\Routing\Route
      */
     public function delete(string $uri, $action)
     {
@@ -130,11 +130,11 @@ class Router
     }
 
     /**
-     * Create an route with any method
+     * Create a route with any method
      *
      * @param string $uri
      * @param mixed $action
-     * @return void
+     * @return \Radiate\Routing\Route
      */
     public function any(string $uri, $action)
     {
@@ -142,12 +142,12 @@ class Router
     }
 
     /**
-     * Create an route matching the given methods
+     * Create a route matching the given methods
      *
      * @param array $methods
      * @param string $uri
      * @param mixed $action
-     * @return void
+     * @return \Radiate\Routing\Route
      */
     public function matches(array $methods, string $uri, $action)
     {
@@ -190,8 +190,8 @@ class Router
     /**
      * Regsiter the route in the router
      *
-     * @param Radiate\Routing\Route $route
-     * @return void
+     * @param \Radiate\Routing\Route $route
+     * @return \Radiate\Routing\Route
      */
     public function addRoute(Route $route)
     {
