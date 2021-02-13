@@ -10,6 +10,9 @@
  * Text Domain: brw
  */
 
+use Radiate\Support\Collection;
+use Radiate\Support\Facades\Str;
+
 /**
  * -----------------------------------------------------------------------------
  *  Register The Auto Loader

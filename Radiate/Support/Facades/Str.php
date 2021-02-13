@@ -26,7 +26,7 @@ class Str
      */
     public static function __callStatic(string $method, array $parameters)
     {
-        $str = (new Stringable(array_pop($parameters)))->$method(...$parameters);
+        $str = (new Stringable(array_shift($parameters)))->$method(...$parameters);
 
         return $str instanceof Stringable ? $str->toString() : $str;
     }
