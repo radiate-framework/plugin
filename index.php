@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Plugin name: WP Base Plugin
+ * Plugin name: Radiate Plugin
  * Plugin URI: https://benrutlandweb.co.uk
  * Description: A WordPress plugin boilerplate
  * Version: 1.0.0
  * Author: Ben Rutland
  * Author URI: https://benrutlandweb.co.uk
- * Text Domain: brw
+ * Text Domain: radiate
  */
 
 /**
