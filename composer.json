@@ -14,7 +14,10 @@
   "autoload": {
     "psr-4": {
       "Plugin\\": "app/"
-    }
+    },
+    "files": [
+      "functions.php"
+    ]
   },
   "require": {
     "php": "^7.3",
