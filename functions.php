@@ -2,7 +2,7 @@
 
 namespace Plugin;
 
-use Plugin\Support\Foundation\Application;
+use Radiate\Foundation\Application;
 
 /**
  * This file is for all the plugin helper functions. Functions should be called
