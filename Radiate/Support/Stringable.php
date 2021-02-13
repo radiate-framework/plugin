@@ -3,6 +3,7 @@
 namespace Radiate\Support;
 
 use Closure;
+use Parsedown;
 use Radiate\Support\Pluralizer;
 
 class Stringable
@@ -395,6 +396,16 @@ class Stringable
     }
 
     /**
+     * Converts Markdown into HTML.
+     *
+     * @return string
+     */
+    public function markdown()
+    {
+        return (new Parsedown)->text($this->string);
+    }
+
+    /**
      * Get the string matching the given pattern.
      *
      * @param  string  $pattern
@@ -462,6 +473,17 @@ class Stringable
     public function padRight(int $length, string $pad = ' ')
     {
         return new static(str_pad($this->string, $length, $pad, STR_PAD_RIGHT));
+    }
+
+    /**
+     * Call the given callback and return a new string.
+     *
+     * @param callable $callback
+     * @return static
+     */
+    public function pipe(callable $callback)
+    {
+        return new static(call_user_func($callback, $this));
     }
 
     /**
@@ -612,6 +634,25 @@ class Stringable
         }
 
         return new static(preg_replace($pattern, $replace, $this->string, $limit));
+    }
+
+    /**
+     * Split a string using a regular expression or by length.
+     *
+     * @param  string|int  $pattern
+     * @param  int  $limit
+     * @param  int  $flags
+     * @return array
+     */
+    public function split($pattern, int $limit = -1, int $flags = 0): array
+    {
+        if (filter_var($pattern, FILTER_VALIDATE_INT) !== false) {
+            return mb_str_split($this->string, $pattern);
+        }
+
+        $segments = preg_split($pattern, $this->string, $limit, $flags);
+
+        return !empty($segments) ? $segments : [];
     }
 
     /**
@@ -787,6 +828,19 @@ class Stringable
     public function rtrim(?string $characters = " \t\n\r\0\x0B")
     {
         return new static(rtrim($this->string, $characters));
+    }
+
+    /**
+     * Call the given Closure with this instance then return the instance.
+     *
+     * @param  callable  $callback
+     * @return mixed
+     */
+    public function tap(callable $callback)
+    {
+        $callback($this);
+
+        return $this;
     }
 
     /**
