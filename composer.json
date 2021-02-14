@@ -16,7 +16,7 @@
       "Plugin\\": "app/"
     },
     "files": [
-      "functions.php"
+      "helpers.php"
     ]
   },
   "require": {
