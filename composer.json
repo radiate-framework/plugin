@@ -1,5 +1,5 @@
 {
-  "name": "brw/radiate-plugin",
+  "name": "radiate/plugin",
   "description": "A WordPress plugin boilerplate",
   "type": "project",
   "license": "MIT",
