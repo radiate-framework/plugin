@@ -1,3 +1,5 @@
+![Radiate](social-preview.png)
+
 # Radiate Plugin
 
 A WordPress plugin boilerplate
