@@ -21,7 +21,7 @@
   },
   "require": {
     "php": "^7.3",
-    "brw/radiate-framework": "^1.0"
+    "radiate/framework": "^1.0"
   },
   "scripts": {
     "post-create-project-cmd": [
