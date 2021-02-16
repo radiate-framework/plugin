@@ -81,7 +81,9 @@ $app->register(Radiate\Auth\AuthServiceProvider::class);
 $app->register(Radiate\Mail\MailServiceProvider::class);
 $app->register(Radiate\Routing\RoutingServiceProvider::class);
 $app->register(Radiate\View\ViewServiceProvider::class);
+$app->register(Radiate\WordPress\WordPressServiceProvider::class);
 
+$app->register(Plugin\Providers\CptServiceProvider::class);
 $app->register(Plugin\Providers\EventServiceProvider::class);
 $app->register(Plugin\Providers\RouteServiceProvider::class);
 
