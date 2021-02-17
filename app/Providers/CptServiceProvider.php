@@ -7,7 +7,7 @@ use Radiate\Foundation\Providers\CptServiceProvider as ServiceProvider;
 class CptServiceProvider extends ServiceProvider
 {
     /**
-     * The custom post types and taxonomies to register
+     * The custom post types to register
      *
      * @var array
      */
