@@ -5,7 +5,9 @@
 
 # Radiate Plugin
 
-A WordPress plugin boilerplate
+A WordPress plugin boilerplate.
+
+Read the full [Radiate framework documentation](https://radiate-framework.github.io/).
 
 ## Installation
 
