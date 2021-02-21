@@ -78,15 +78,16 @@ $app->routeMiddleware([
  */
 
 $app->register(Radiate\Auth\AuthServiceProvider::class);
+$app->register(Radiate\Foundation\Providers\FormRequestServiceProvider::class);
 $app->register(Radiate\Mail\MailServiceProvider::class);
 $app->register(Radiate\Routing\RoutingServiceProvider::class);
+$app->register(Radiate\Validation\ValidationServiceProvider::class);
 $app->register(Radiate\View\ViewServiceProvider::class);
 $app->register(Radiate\WordPress\WordPressServiceProvider::class);
 
-$app->register(Plugin\Providers\EventServiceProvider::class);
-$app->register(Plugin\Providers\RouteServiceProvider::class);
-$app->register(Plugin\Providers\WordPressServiceProvider::class);
-
+$app->register(Theme\Providers\EventServiceProvider::class);
+$app->register(Theme\Providers\RouteServiceProvider::class);
+$app->register(Theme\Providers\WordPressServiceProvider::class);
 
 /**
  * -----------------------------------------------------------------------------
