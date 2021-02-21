@@ -89,6 +89,7 @@ $app->register(Plugin\Providers\EventServiceProvider::class);
 $app->register(Plugin\Providers\RouteServiceProvider::class);
 $app->register(Plugin\Providers\WordPressServiceProvider::class);
 
+
 /**
  * -----------------------------------------------------------------------------
  *  Run The Application
