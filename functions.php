@@ -78,6 +78,7 @@ $app->routeMiddleware([
  */
 
 $app->register(Radiate\Auth\AuthServiceProvider::class);
+$app->register(Radiate\Database\DatabaseServiceProvider::class);
 $app->register(Radiate\Foundation\Providers\FormRequestServiceProvider::class);
 $app->register(Radiate\Mail\MailServiceProvider::class);
 $app->register(Radiate\Routing\RoutingServiceProvider::class);
