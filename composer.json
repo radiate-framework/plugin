@@ -21,7 +21,7 @@
   },
   "require": {
     "php": "^7.3",
-    "radiate/framework": "^1.0"
+    "radiate/framework": "dev-2.x-alpha"
   },
   "scripts": {
     "post-create-project-cmd": [
