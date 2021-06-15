@@ -84,6 +84,7 @@ $app->register(Radiate\Database\DatabaseServiceProvider::class);
 $app->register(Radiate\Foundation\Providers\FormRequestServiceProvider::class);
 $app->register(Radiate\Mail\MailServiceProvider::class);
 $app->register(Radiate\Routing\RoutingServiceProvider::class);
+$app->register(Radiate\Schedule\ScheduleServiceProvider::class);
 $app->register(Radiate\Validation\ValidationServiceProvider::class);
 $app->register(Radiate\View\ViewServiceProvider::class);
 $app->register(Radiate\WordPress\WordPressServiceProvider::class);
@@ -91,7 +92,9 @@ $app->register(Radiate\WordPress\WordPressServiceProvider::class);
 $app->register(Plugin\Providers\EventServiceProvider::class);
 $app->register(Plugin\Providers\PluginServiceProvider::class);
 $app->register(Plugin\Providers\RouteServiceProvider::class);
+$app->register(Plugin\Providers\ScheduleServiceProvider::class);
 $app->register(Plugin\Providers\WordPressServiceProvider::class);
+
 
 
 /**
@@ -118,6 +121,7 @@ $app->aliases([
     'Hash'       => \Radiate\Support\Hash::class,
     'Http'       => \Radiate\Support\Facades\Http::class,
     'Mail'       => \Radiate\Support\Facades\Mail::class,
+    'Option'     => \Radiate\Support\Facades\Option::class,
     'Request'    => \Radiate\Support\Facades\Request::class,
     'Route'      => \Radiate\Support\Facades\Route::class,
     'Str'        => \Radiate\Support\Str::class,
