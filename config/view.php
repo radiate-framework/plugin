@@ -1,8 +1,7 @@
 <?php
 
-use Radiate\Support\Facades\App;
-
 return [
+
     /*
     |--------------------------------------------------------------------------
     | View Storage Path
@@ -12,5 +11,5 @@ return [
     |
     */
 
-    'path' => App::basePath('views'),
+    'path' => base_path('resources/views'),
 ];

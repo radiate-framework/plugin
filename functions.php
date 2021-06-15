@@ -38,7 +38,6 @@ require __DIR__ . '/vendor/autoload.php';
 
 $app = new Radiate\Foundation\Application(__DIR__);
 
-
 /**
  * -----------------------------------------------------------------------------
  *  Register the middleware
@@ -81,7 +80,9 @@ $app->routeMiddleware([
 $app->register(Radiate\Auth\AuthServiceProvider::class);
 $app->register(Radiate\Cache\CacheServiceProvider::class);
 $app->register(Radiate\Database\DatabaseServiceProvider::class);
+$app->register(Radiate\Encryption\EncryptionServiceProvider::class);
 $app->register(Radiate\Foundation\Providers\FormRequestServiceProvider::class);
+$app->register(Radiate\Hashing\HashServiceProvider::class);
 $app->register(Radiate\Mail\MailServiceProvider::class);
 $app->register(Radiate\Routing\RoutingServiceProvider::class);
 $app->register(Radiate\Schedule\ScheduleServiceProvider::class);
@@ -115,10 +116,12 @@ $app->aliases([
     'Cache'      => \Radiate\Support\Facades\Cache::class,
     'Collection' => \Radiate\Support\Collection::class,
     'Config'     => \Radiate\Support\Facades\Config::class,
+    'Crypt'      => \Radiate\Support\Facades\Crypt::class,
     'DB'         => \Radiate\Support\Facades\DB::class,
     'Event'      => \Radiate\Support\Facades\Event::class,
     'File'       => \Radiate\Support\Facades\File::class,
-    'Hash'       => \Radiate\Support\Hash::class,
+    'Gate'       => \Radiate\Support\Facades\Gate::class,
+    'Hash'       => \Radiate\Support\Facades\Hash::class,
     'Http'       => \Radiate\Support\Facades\Http::class,
     'Mail'       => \Radiate\Support\Facades\Mail::class,
     'Option'     => \Radiate\Support\Facades\Option::class,
