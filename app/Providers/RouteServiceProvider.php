@@ -22,6 +22,8 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Map the AJAX routes
      *
+     * These routes all receive CSRF protection, etc.
+     *
      * @return void
      */
     public function mapAjaxRoutes()
@@ -32,6 +34,8 @@ class RouteServiceProvider extends ServiceProvider
 
     /**
      * Map the API routes
+     *
+     * These routes are stateless.
      *
      * @return void
      */
