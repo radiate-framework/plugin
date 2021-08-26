@@ -39,6 +39,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        # 'api' => [
+        #     'driver' => 'session',
+        #     'provider' => 'users',
+        # ],
     ],
 
     /*
@@ -59,10 +64,10 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'wordpress',
-            'table' => 'users',
-        ],
+        # 'users' => [
+        #     'driver' => 'wordpress',
+        #     'table' => 'users',
+        # ],
 
         'users' => [
             'driver' => 'radiate',

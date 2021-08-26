@@ -56,6 +56,7 @@ $app->middleware([
 
 $app->routeMiddleware([
     'auth' => Radiate\Auth\Middleware\Authenticate::class,
+    'auth.basic' => Radiate\Auth\Middleware\AuthenticateWithBasicAuth::class,
     'ajax' => [
         //
     ],
