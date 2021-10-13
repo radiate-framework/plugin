@@ -122,6 +122,7 @@ $app->aliases([
     'Mail'       => \Radiate\Support\Facades\Mail::class,
     'Option'     => \Radiate\Support\Facades\Option::class,
     'Request'    => \Radiate\Support\Facades\Request::class,
+    'Response'   => \Radiate\Support\Facades\Response::class,
     'Route'      => \Radiate\Support\Facades\Route::class,
     'Str'        => \Radiate\Support\Str::class,
     'URL'        => \Radiate\Support\Facades\URL::class,

@@ -1,6 +1,26 @@
 <?php
 
-use Radiate\Support\Facades\App;
+use Radiate\Foundation\Application;
+use Radiate\Http\ResponseFactory;
+use Radiate\View\Factory as ViewFactory;
+
+if (!function_exists('app')) {
+    /**
+     * Get the available container instance.
+     *
+     * @param  string|null  $abstract
+     * @param  array  $parameters
+     * @return mixed|\Radiate\Foundation\Application
+     */
+    function app(?string $abstract = null, array $parameters = [])
+    {
+        if (is_null($abstract)) {
+            return Application::getInstance();
+        }
+
+        return Application::getInstance()->make($abstract, $parameters);
+    }
+}
 
 if (!function_exists('base_path')) {
     /**
@@ -11,7 +31,7 @@ if (!function_exists('base_path')) {
      */
     function base_path(?string $path = null)
     {
-        return App::basePath($path);
+        return app()->basePath($path);
     }
 }
 
@@ -34,5 +54,46 @@ if (!function_exists('env')) {
         }
 
         return $default;
+    }
+}
+
+if (!function_exists('response')) {
+    /**
+     * Create a HTTP response
+     *
+     * @param mixed $content
+     * @param integer $status
+     * @param array $headers
+     * @return \Radiate\Http\ResponseFactory|\Radiate\Http\Response
+     */
+    function response($content = '', int $status = 200, array $headers = [])
+    {
+        $factory = app(ResponseFactory::class);
+
+        if (func_num_args() === 0) {
+            return $factory;
+        }
+
+        return $factory->make($content, $status, $headers);
+    }
+}
+
+if (!function_exists('view')) {
+    /**
+     * Create a view
+     *
+     * @param string|null $view
+     * @param array $data
+     * @return \Radiate\View\Factory|\Radiate\View\View
+     */
+    function view(?string $view = null, array $data = [])
+    {
+        $factory = app(ViewFactory::class);
+
+        if (func_num_args() === 0) {
+            return $factory;
+        }
+
+        return $factory->make($view, $data);
     }
 }
