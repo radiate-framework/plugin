@@ -78,6 +78,7 @@ $app->register(Radiate\Database\DatabaseServiceProvider::class);
 $app->register(Radiate\Encryption\EncryptionServiceProvider::class);
 $app->register(Radiate\Foundation\Providers\FormRequestServiceProvider::class);
 $app->register(Radiate\Hashing\HashServiceProvider::class);
+$app->register(Radiate\JWT\JwtServiceProvider::class);
 $app->register(Radiate\Mail\MailServiceProvider::class);
 $app->register(Radiate\Routing\RoutingServiceProvider::class);
 $app->register(Radiate\Schedule\ScheduleServiceProvider::class);
@@ -119,6 +120,7 @@ $app->aliases([
     'Gate'       => \Radiate\Support\Facades\Gate::class,
     'Hash'       => \Radiate\Support\Facades\Hash::class,
     'Http'       => \Radiate\Support\Facades\Http::class,
+    'JWT'        => \Radiate\Support\Facades\JWT::class,
     'Mail'       => \Radiate\Support\Facades\Mail::class,
     'Option'     => \Radiate\Support\Facades\Option::class,
     'Request'    => \Radiate\Support\Facades\Request::class,
